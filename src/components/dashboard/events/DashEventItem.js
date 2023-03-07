@@ -14,7 +14,7 @@ function DashEventItem({ event }) {
    const deleteHandler = (id) => {
     if (window.confirm("Are you sure you want to delete this donation ?")) {
       dispatch(deleteEvent(id));
-      window.location.reload();
+     
     }
   };
   return (
