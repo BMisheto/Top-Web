@@ -101,7 +101,7 @@ function DashCreatePostPage() {
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     required
-                    placeholder="Product Name"
+                    placeholder="Title"
                   />
                 </div>
 
@@ -117,7 +117,7 @@ function DashCreatePostPage() {
                     value={link}
                     onChange={(e) => setLink(e.target.value)}
                     required
-                    placeholder="Product Name"
+                    placeholder="Link"
                   />
                 </div>
                 {/* event location */}
@@ -134,7 +134,7 @@ function DashCreatePostPage() {
                     type="checkbox"
                     checked={is_poll}
                     onChange={(e) => setPoll(e.target.checked)}
-                    placeholder="Featured "
+                    placeholder="Poll "
                   />
                 </div>
               </div>
@@ -147,7 +147,7 @@ function DashCreatePostPage() {
                   <textarea
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
-                    placeholder="Description"
+                    placeholder="Content"
                     className="p-2 border bg-none outline-none rounded-xl placeholder:text-gray-600
                                                   placeholder:text-[15px]
                                                   placeholder:pl-4 min-w-[300px] md:min-w-[320px] lg:min-w-[400px] h-full text-[15px] min-h-[200px]"
