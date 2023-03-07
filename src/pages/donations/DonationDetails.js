@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BsArrowLeft } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router';
@@ -6,10 +6,14 @@ import {listDonationDetails} from "../../features/actions/donationsActions"
 import { motion } from 'framer-motion';
 import { REACT_API_URL } from '../../utilities/utils';
 import { HiCurrencyDollar } from 'react-icons/hi';
+import { AiFillCloseCircle } from 'react-icons/ai';
 
 function DonationDetails() {
     const dispatch = useDispatch();
   const navigate = useNavigate();
+
+
+  const [modal, setModal] = useState(true);
 
   const getId = useParams();
   const donationId = getId.id;
@@ -84,7 +88,9 @@ function DonationDetails() {
             <p className="max-w-lg">{donation.description}</p>
 
             <div className='w-full'>
-                <button className="self-end flex flex-row items-center justify-center content-center gap-2 border border-gray-400 text-green-500 hover:border-green-500 hover:bg-green-500 hover:text-white min-w-[100px] rounded-lg p-2 
+                <button
+                onClick={() => setModal(!modal)}
+                 className="self-end flex flex-row items-center justify-center content-center gap-2 border border-gray-400 text-green-500 hover:border-green-500 hover:bg-green-500 hover:text-white min-w-[100px] rounded-lg p-2 
                 ">Donate
 
                 <HiCurrencyDollar />
@@ -94,6 +100,63 @@ function DonationDetails() {
             </div>
            
           </div>
+
+
+          {modal && (
+
+<div className='fixed top-1/2 bottom-0  z-50 bg-gray-100 flex flex-col items-center content-center justify-center  border border-gray-300 w-[300px] md:w-[300px] rounded-xl'>
+  <div className='flex flex-col  p-2 md:p-3 gap-3 md:gap-4 items-center content-center justify-center'>
+    <div onClick={() => setModal(!modal)} className="cursor-pointer flex flex-row text-lg items-center content-center justify-center gap-2 md:gap-3">
+      <h1>close</h1>
+      <AiFillCloseCircle />
+      </div>
+    <div className='flex flex-row justify-start gap-2 md:gap-3'>
+    <input type="radio"  />
+      <h1 className='text-lg'>
+        Mpesa
+      </h1>
+      
+
+    </div>
+    <div className='flex flex-row justify-start gap-2 md:gap-3'>
+    <input type="radio"  />
+      <h1 className='text-lg'>
+        Tigo Pesa
+      </h1>
+      
+
+    </div>
+    <div className='flex flex-row justify-start gap-2 md:gap-3'>
+    <input type="radio"  />
+      <h1 className='text-lg'>
+        Mastercard
+      </h1>
+      
+
+    </div>
+    <div className='flex flex-row justify-start gap-2 md:gap-3'>
+    <input type="radio"  />
+      <h1 className='text-lg'>
+        Visa
+      </h1>
+      
+
+    </div>
+    <p className='bg-gray-300 text-center p-2 md:p-3 rounded-xl'>
+      We haven't activated this feature for now
+    </p>
+    
+   
+    </div>
+
+
+</div>
+
+
+
+          )}
+
+        
         </div>
       </div>
     </div>
