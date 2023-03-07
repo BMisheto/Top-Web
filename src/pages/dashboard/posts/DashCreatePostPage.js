@@ -13,7 +13,7 @@ function DashCreatePostPage() {
   const [user, setUser] = useState("");
   const [is_poll, setPoll] = useState("");
   const [link, setLink] = useState("");
-  const [choices, setChoices] = useState(["Option 1", "Option 2", "Option 3"]);
+  const [choices, setChoices] = useState(["Option 1", "Option 2"]);
 
 
   const userLogin = useSelector((state) => state.userLogin);
