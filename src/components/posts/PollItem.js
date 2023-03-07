@@ -19,7 +19,7 @@ function PollItem({ poll }) {
     
     dispatch(votePoll(id))
 
-    window.location.reload();
+  
  
   }
 
