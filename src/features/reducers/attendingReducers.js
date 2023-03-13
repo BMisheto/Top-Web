@@ -8,6 +8,7 @@ import {
   ATTENDING_LIST_SUCCESS,
   ATTENDING_REMOVE_FAIL,
   ATTENDING_REMOVE_REQUEST,
+  ATTENDING_REMOVE_RESET,
   ATTENDING_REMOVE_SUCCESS,
 } from "../constants/attendingConstants";
 
@@ -39,7 +40,33 @@ export const attendingListReducer = (state = { attending: [] }, action) => {
   }
 };
 
-/* REDUCER USED IN ProductListScreen COMPONENT */
+export const attendingAddReducer = (state = {}, action) => {
+  switch (action.type) {
+    case ATTENDING_ADD_REQUEST:
+      return {
+        loading: true,
+      };
+
+    case ATTENDING_ADD_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+      };
+
+    case ATTENDING_ADD_FAIL:
+      return {
+        loading: false,
+        error: action.payload.message,
+      };
+
+    case ATTENDING_ADD_RESET:
+      return {};
+
+    default:
+      return state;
+  }
+};
+
 export const attendingRemoveReducer = (state = {}, action) => {
   switch (action.type) {
     case ATTENDING_REMOVE_REQUEST:
@@ -59,32 +86,7 @@ export const attendingRemoveReducer = (state = {}, action) => {
         error: action.payload,
       };
 
-    default:
-      return state;
-  }
-};
-
-/* REDUCER USED IN ProductListScreen COMPONENT */
-export const attendingAddReducer = (state = {}, action) => {
-  switch (action.type) {
-    case ATTENDING_ADD_REQUEST:
-      return {
-        loading: true,
-      };
-
-    case ATTENDING_ADD_SUCCESS:
-      return {
-        loading: false,
-        success: true,
-      };
-
-    case ATTENDING_ADD_FAIL:
-      return {
-        loading: false,
-        error: action.payload,
-      };
-
-    case ATTENDING_ADD_RESET:
+    case ATTENDING_REMOVE_RESET:
       return {};
 
     default:

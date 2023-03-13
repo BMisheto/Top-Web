@@ -116,9 +116,9 @@ function EventsDetails() {
             
             </div>
 
-            <div className="flex flex-row justify-between items-center content-center">
-            <h1>Attending</h1>
-            <p>{attendingCount}</p>
+            <div className="flex flex-col gap-1 md:gap-2 justify-center  text-md items-end content-start">
+            <h1 className=" font-semibold text-gray-500">Attending</h1>
+            <p className="text-sm border bg-gray-100 p-1 md:p-2 rounded-lg text-gray-600">{attendingCount}</p>
           </div>
 
             <p className="max-w-lg">{event.description}</p>
@@ -136,7 +136,7 @@ function EventsDetails() {
                 <motion.button
                   onClick={handleModal}
                   whileTap={{ scale: 0.99 }}
-                  className="self-end flex flex-row items-center justify-center content-center gap-2  text-white bg-green-500 hover:border-green-500 hover:bg-green-500 hover:text-white min-w-[100px] rounded-xl w-full  rounded-lg p-2 h-[50px] hover:drop-shadow-xl 
+                  className="self-end flex flex-row items-center justify-center content-center gap-2  text-white bg-green-500 hover:border-green-500 hover:bg-green-500 hover:text-white min-w-[100px] w-full  rounded-lg p-2 h-[50px] hover:drop-shadow-xl 
   "
                 >
                   Attend
@@ -151,7 +151,7 @@ function EventsDetails() {
                 <motion.button
                   onClick={handleModal}
                   whileTap={{ scale: 0.99 }}
-                  className="self-end flex flex-row items-center justify-center content-center gap-2  text-white bg-gray-700 hover:border-green-500 hover:bg-gray-800 hover:text-white min-w-[100px] rounded-xl w-full  rounded-lg p-2 h-[50px] hover:drop-shadow-xl 
+                  className="self-end flex flex-row items-center justify-center content-center gap-2  text-white bg-gray-700 hover:border-green-500 hover:bg-gray-800 hover:text-white min-w-[100px]  w-full  rounded-lg p-2 h-[50px] hover:drop-shadow-xl 
   "
                 >
                   Remove

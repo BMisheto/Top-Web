@@ -12,9 +12,9 @@ import { getUserDetails, logout } from "../../features/actions/userActions";
 import { USER_UPDATE_PROFILE_RESET } from "../../features/constants/userConstants";
 import { motion } from "framer-motion";
 import { REACT_APP_URL } from "../../utilities/utils";
-import MyDonationPage from "./MyDonationPage";
-import MyEventsPage from "./MyEventsPage";
-import MyPostsPage from "./MyPostsPage";
+import MyPostsPage from "./posts/MyPostsPage";
+import MyDonationPage from "./donation/MyDonationPage";
+import MyEventsPage from "./events/MyEventsPage";
 
 function Account() {
 
@@ -73,6 +73,8 @@ function Account() {
         setEdit(false);
       }
     }
+
+
   }, [dispatch, keyword, user, userInfo, success]);
 
   /* HANDLERS */
@@ -112,7 +114,7 @@ function Account() {
             )}
           </div>
 
-          <motion.div className="flex flex-col md:flex-row gap-4 md:gap-5 justify-start items-start content-start">
+          <motion.div className="flex flex-col md:flex-row gap-4 md:gap-5 justify-center items-center content-center w-full md:w-[80%]">
             {/* profile and orders */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
@@ -176,15 +178,17 @@ function Account() {
             </motion.div>
           </motion.div>
 
-          <motion.div className="p-2 md:p-3 w-full md:w-[60%] mx-auto">
+          <motion.div className="flex flex-col gap-3 md:gap-4 p-2 md:p-3 w-full md:w-auto   mx-auto">
 
-            <div className="flex flex-row justify-center items-center content-center gap-2">
-              <h1 onClick={() => setActive
-              (1)} className="bg-gray-100 p-2 rounded-lg">Posts</h1>
-              <h1 onClick={() => setActive
-              (2)} className="bg-gray-100 p-2 rounded-lg">Posts</h1>
-              <h1 onClick={() => setActive
-              (3)} className="bg-gray-100 p-2 rounded-lg">Posts</h1>
+            <div className="flex flex-row justify-center items-center content-center gap-2 bg-gray-100 rounded-xl border border-gray-200 text-[14px] md:text-[16px]  p-1">
+              <button onClick={() => setActive
+              (1)} className={active === 1 ? 'bg-white p-2 rounded-xl shadow-lg' : 'p-2 text-gray-500'}>My Posts</button>
+              <button onClick={() => setActive
+              (2)} className={active === 2 ? 'bg-white p-2 rounded-xl shadow-lg' : 'p-2 text-gray-500'}>My Events</button>
+              <button onClick={() => setActive
+              (3)} className={active === 3 ? 'bg-white p-2 rounded-xl shadow-lg' : 'p-2  text-gray-500'}>My Donations</button>
+            
+             
              
             </div>
           {active === 3 && <MyDonationPage  key={3} /> }

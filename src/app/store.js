@@ -10,6 +10,7 @@ import {
   postDeleteReducer,
   postDetailsReducer,
   postListReducer,
+  postMyListReducer,
   postUpdateReducer,
 } from "../features/reducers/postReducers";
 import {
@@ -61,6 +62,7 @@ import {
 /* COMBINED REDUCER */
 const reducer = combineReducers({
   postList: postListReducer,
+  postMyList: postMyListReducer,
   postDetails: postDetailsReducer,
   postDelete: postDeleteReducer,
   postCreate: postCreateReducer,
@@ -93,8 +95,9 @@ const reducer = combineReducers({
   eventUpdate: eventUpdateReducer,
 
   attendingList: attendingListReducer,
-  attendingRemove: attendingRemoveReducer,
   attendingAdd: attendingAddReducer,
+  
+  attendingRemove: attendingRemoveReducer,
 
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,

@@ -1,60 +1,91 @@
-import React, { useEffect, useState } from 'react'
-import { motion } from 'framer-motion';
+import React from 'react'
 import { MdUpdate } from 'react-icons/md';
-import { REACT_API_URL } from '../../../utilities/utils';
-import { useDispatch, useSelector } from 'react-redux';
-import { createPost } from '../../../features/actions/postActions';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 
-function DashCreatePostPage() {
+function PostEdit() {
 
-  const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+  const [message, setMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState(false);
+
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [user, setUser] = useState("");
-  const [is_poll, setPoll] = useState(false);
+  const [is_poll, setPoll] = useState("");
   const [link, setLink] = useState("");
-  const [choices, setChoices] = useState(["Option 1", "Option 2"]);
+  const [pollItems, setPollItems] = useState([]);
+  const [choice_text, setChoice] = useState("");
 
+  const getId = useParams();
+  const postId = getId.id;
+
+  const postUpdate = useSelector((state) => state.postUpdate);
+  const {
+    success: successUpdate,
+    loading: loadingUpdate,
+    error: errorUpdate,
+  } = postUpdate;
+
+  const postDetails = useSelector((state) => state.postDetails);
+  const { loading, post, error } = postDetails;
+
+  const pollList = useSelector((state) => state.pollList);
+  const { loading: pollLoading, polls, error: pollError, count } = pollList;
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  // product detail dispatch
+  useEffect(() => {
+    // CHECK IF PRODUCT WAS UDPATED
+    if (successUpdate) {
+      dispatch({ type: POST_UPDATE_RESET });
+      dispatch({ type: POST_DETAILS_REQUEST });
+      dispatch({ type: POLL_UPDATE_REQUEST });
+      dispatch({ type: POLL_DETAILS_REQUEST });
+      navigate("/account/posts/");
+    } else {
+      if (!post.title || post._id !== Number(postId)) {
+        dispatch(listPostDetails(postId));
+        dispatch(listPolls(postId));
+      } else {
+        setTitle(post.title);
+        setContent(post.content);
+        setPoll(post.is_poll);
+        setLink(post.link);
+        setPollItems(polls);
+      }
+    }
+  }, [dispatch, post, postId, navigate, successUpdate]);
 
-  useEffect(() =>{
-
-    setUser(userInfo._id);
-
-  }, [ userInfo])
-
-
-
+  /* HANDLERS */
 
   const submitHandler = (e) => {
     e.preventDefault();
 
     dispatch(
-      createPost({
+      updatePost({
+        _id: postId,
         title,
-        user,
         content,
         is_poll,
         link,
-        choices,
+        polls,
       })
     );
   };
+  const createPollHandler = (e) => {
+    e.preventDefault();
 
-  function addOption(newOption) {
-    setChoices([...choices, newOption]);
-  }
+    dispatch(createPoll(postId));
+  };
+  const updatePollHandler = (e) => {
+    e.preventDefault();
+    
 
-   // function to remove an option from the poll
-   function removeOption(optionIndex) {
-    const newChoices = [...choices];
-    newChoices.splice(optionIndex, 1);
-    setChoices(newChoices);
-  }
-
+    dispatch(createPoll(postId));
+  };
   return (
     <motion.main className="min-h-[500px]">
     <div className="subpixel-antialiased min-h-screen inset-0 flex justify-center items-center font-sans    mx-auto  p-3  mt-[70px] ">
@@ -68,7 +99,7 @@ function DashCreatePostPage() {
           </div>
 
           <div className="text-lg md:text-xl  p-2 text-gray-700 font-bold">
-            <h1></h1>
+            <h1>{post._id}</h1>
           </div>
         </div>
 
@@ -116,7 +147,7 @@ function DashCreatePostPage() {
                     type="text"
                     value={link}
                     onChange={(e) => setLink(e.target.value)}
-                    
+                    required
                     placeholder="Product Name"
                   />
                 </div>
@@ -124,10 +155,17 @@ function DashCreatePostPage() {
                 <div className="flex flex-col items-start content-center gap-1 md:gap-3 p-1  ">
                   <label className="font-[500] text-gray-700">Type</label>
                   <p className="text-xs">
-                    Make the post a Poll or Normal post
+                   
                   </p>
+                  {is_poll && ( <div className="bg-gray-200 p-2 md:p-3 rounded-lg border border-gray-300">
+                    <h1>Poll</h1>
+                  </div>)}
+                  {is_poll == false && ( <div className="bg-gray-200 p-2 md:p-3 rounded-lg border border-gray-300">
+                    <h1>Normal Post</h1>
+                  </div>)}
+                  
 
-                  <input
+                  {/* <input
                     className="p-2 border bg-none outline-none rounded-full placeholder:text-gray-600
                                                                                       placeholder:text-[15px]
                                                                                       placeholder:pl-4  h-[20px] text-[15px]"
@@ -135,7 +173,7 @@ function DashCreatePostPage() {
                     checked={is_poll}
                     onChange={(e) => setPoll(e.target.checked)}
                     placeholder="Featured "
-                  />
+                  /> */}
                 </div>
               </div>
 
@@ -162,7 +200,7 @@ function DashCreatePostPage() {
                 type="submit"
                 className="self-end transition duration-100 delay-100 ease-in-out flex flex-row items-center content-center justify-center gap-2 md:gap-3  border-gray-200 bg-blue-600 text-white p-1 md:p-2 rounded-xl h-[50px] hover:drop-shadow-md hover:bg-blue-500 hover:border-blue-500 hover:text-white min-w-full md:min-w-[200px]"
               >
-                <h1>Add Post</h1>
+                <h1>Update Post</h1>
                 <MdUpdate />
               </button>
             </div>
@@ -171,59 +209,8 @@ function DashCreatePostPage() {
           {/* image upload */}
         </form>
 
-        {is_poll ? (
-          <form 
-         
-          className=" flex flex-col gap-2 md:gap-3 center w-full  items-center content-center border rounded-xl p-2 m:p-3">
-            <div className="flex flex-row justify-between items-center content-center w-full">
-              <div className=" text-lg md:text-xl  p-2 text-gray-700 font-[500]">
-                <h1>Polls</h1>
-              </div>
-            </div>
-            <div className="flex flex-col w-full  md:grid md:grid-cols-2  items-center content-center justify-center bg-gray-100 rounded-xl border p-1 md:p-2">
-              {choices?.map((option, index) => (
-                <div className="flex flex-col  justify-start content-start  items-start gap-2 md:gap-3 p-1 md:p-2 text-[13px] md:text-[15px] w-auto">
-                  <div className=" flex flex-row justify-between items-center content-center w-full">
-                    <h1 className="font-[500] text-gray-700">Name</h1>
-                    {/* <button
-                      onClick={() => deletePollHandler(poll._id)}
-                      className="flex flex-row justify-center content-center items-center gap-1 md:gap-2 rounded-lg p-2   min-w-[100px] hover:bg-red-500 hover:text-white group"
-                    >
-                      Deletes
-                      <AiFillDelete className="text-red-500 group-hover:text-white" />
-                    </button> */}
-                  </div>
-
-                  <input
-                    className="p-2 border bg-none outline-none rounded-xl placeholder:text-gray-600
-                                                   placeholder:text-[15px]
-                                                   placeholder:pl-4  min-w-[300px] md:min-w-[320px] lg:min-w-[400px] h-[60px] drop-shadow-sm "
-                    type="text"
-                    value={choices.choice_text}
-                    onChange={(e) => {
-                      const newItems = [...choices];
-                      newItems[index] = e.target.value;
-                      setChoices(newItems);
-                    }}
-                    placeholder="Poll Name"
-                  />
-                </div>
-              ))}
-            </div>
-
-            <div onClick={addOption} className="cursor-pointer">
-              add option
-            </div>
-            <div onClick={removeOption} className="cursor-pointer">
-              remove option
-            </div>
-
-            {/* Offer and Featured */}
-            
-          </form>
-        ) : (
-          ""
-        )}
+        
+    
 
         {/* navigation */}
         <div></div>
@@ -233,4 +220,4 @@ function DashCreatePostPage() {
   )
 }
 
-export default DashCreatePostPage
+export default PostEdit

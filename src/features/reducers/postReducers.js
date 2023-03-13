@@ -28,7 +28,37 @@ export const postListReducer = (state = { posts: [] }, action) => {
     case POST_LIST_REQUEST:
       return {
         loading: true,
-        products: [],
+        posts: [],
+      };
+
+    case POST_LIST_SUCCESS:
+      return {
+        loading: false,
+        posts: action.payload.posts,
+        page: action.payload.page,
+        pages: action.payload.pages,
+        count: action.payload.count,
+      };
+
+    case POST_LIST_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+
+    default:
+      return state;
+  }
+};
+
+
+
+export const postMyListReducer = (state = { posts: [] }, action) => {
+  switch (action.type) {
+    case POST_LIST_REQUEST:
+      return {
+        loading: true,
+        posts: [],
       };
 
     case POST_LIST_SUCCESS:

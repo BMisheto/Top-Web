@@ -26,10 +26,8 @@ export const listComments = (id) => async (dispatch) => {
     dispatch({
       type: COMMENT_LIST_REQUEST,
     });
-    console.log(id);
-    const { data } = await axios.get(
-      `${REACT_API_URL}/feed/comments/${id}/`
-    );
+
+    const { data } = await axios.get(`${REACT_API_URL}/feed/comments/${id}/`);
 
     dispatch({
       type: COMMENT_LIST_SUCCESS,
@@ -100,15 +98,12 @@ export const createComment = (comment) => async (dispatch, getState) => {
       },
     };
 
-    // console.log(comment)
-
     /* MAKING API CALL TO CREATE PRODUCT */
     const { data } = await axios.post(
       `${REACT_APP_URL}/feed/${comment.post}/comment/create/`,
       comment,
-      
-      config,
-      
+
+      config
     );
 
     dispatch({

@@ -47,6 +47,31 @@ export const listEvents =
     }
   };
 
+
+export const listMyEvents =
+  (keyword = "",id) =>
+  async (dispatch) => {
+    try {
+      dispatch({
+        type: EVENT_LIST_REQUEST,
+      });
+      const { data } = await axios.get(`${REACT_APP_URL}/events/${id}/myevents/${keyword}`);
+
+      dispatch({
+        type: EVENT_LIST_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: EVENT_LIST_FAIL,
+        payload:
+          error.response && error.response.data.detail
+            ? error.response.data.detail
+            : error.message,
+      });
+    }
+  };
+
 /* ACTION CREATOR USED IN ProductScreen COMPONENT */
 export const listEventDetails = (id) => async (dispatch) => {
   try {

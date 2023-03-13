@@ -89,11 +89,13 @@ export const removeAttending = (event) => async (dispatch, getState) => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${userInfo.token}`,
       },
+      data: {
+        event: event,
+      },
     };
 
     const { data } = await axios.delete(
       `${REACT_API_URL}/events/attending/remove/${event.id}/`,
-      event,
       config
     );
 
@@ -111,3 +113,4 @@ export const removeAttending = (event) => async (dispatch, getState) => {
     });
   }
 };
+

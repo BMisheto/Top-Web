@@ -52,7 +52,8 @@ function DashPostList() {
     dispatch(createPost());
   };
 
-  return <motion.div className=" p-1 md:p-2   flex flex-col gap-3 justify-center content-center items-center text-black  mx-auto bg-white mt-[100px] ">
+  return (
+  <motion.div className=" p-1 md:p-2   flex flex-col gap-3 justify-center content-center items-center text-black  mx-auto bg-white mt-[100px] ">
 
   <div className='w-full flex flex-row items-end justify-end gap-2 md:gap-3'>
       <motion.button 
@@ -104,7 +105,8 @@ function DashPostList() {
 
 
 
-</motion.div>;
+</motion.div>
+)
 }
 
 export default DashPostList;
