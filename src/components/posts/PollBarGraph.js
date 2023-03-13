@@ -10,7 +10,7 @@ import {
 } from "recharts";
 
 function PollBarGraph({ data }) {
-  console.log(data);
+  
   return (
     <div className="flex flex-col items-start justify-center content-center gap-2  border-b  border-r border-gray-100 rounded-xl p-1 md:p-2">
       <div className="w-full text-center p-1">

@@ -11,7 +11,13 @@ import {
 } from "react-icons/ai";
 import { FaPoll } from "react-icons/fa";
 import PostItem from "./PostItem";
-import { BsFilePostFill, BsX } from "react-icons/bs";
+import {
+  BsCalculatorFill,
+  BsCalendar,
+  BsCalendar2Check,
+  BsFilePostFill,
+  BsX,
+} from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useLocation, useNavigate, useParams } from "react-router";
 import { createPost, listPosts } from "../../features/actions/postActions";
@@ -19,6 +25,7 @@ import { POST_CREATE_RESET } from "../../features/constants/postConstants";
 import PollBarGraph from "./PollBarGraph";
 import { GraphData as data } from "../fakeData.js/GraphData";
 import PollPieChart from "./PollPieChart";
+import { HiCurrencyDollar } from "react-icons/hi";
 
 function Posts() {
   const dispatch = useDispatch();
@@ -51,7 +58,7 @@ function Posts() {
   };
 
   const createPostHandler = () => {
-    dispatch(createPost());
+    navigate("/feed/create/post");
   };
 
   return (
@@ -95,20 +102,32 @@ function Posts() {
             className="flex flex-col p-2 md:p-3 gap-3"
           >
             <motion.div
-              whileHover={{ scale: 1.05 }}
-              className=" text-[1.1rem] md:text-[1.3rem] flex flex-row items-center content-center justify-center gap-2 bg-black text-white rounded-full p-2 min-w-[100px] cursor-pointer"
-            >
-              <h1>Poll</h1>
-              <FaPoll />
-            </motion.div>
-            <motion.div
               onClick={createPostHandler}
-              whileHover={{ scale: 1.05 }}
-              className=" text-[1.1rem] md:text-[1.3rem] flex flex-row items-center content-center justify-center gap-2 bg-black text-white rounded-full p-2 min-w-[100px] cursor-pointer"
+              whileHover={{ scale: 1.01 }}
+              whileTap={{ scale: 0.9 }}
+              className=" text-sm md:text-[17px] flex flex-row items-center content-center justify-center gap-2 bg-gray-700 text-white rounded-full p-2 min-w-[120px] h-[50px] cursor-pointer shadow-lg"
             >
               <h1>Post</h1>
 
               <BsFilePostFill />
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.01 }}
+              whileTap={{ scale: 0.9 }}
+              className=" text-sm md:text-[17px] flex flex-row items-center content-center justify-center gap-2 bg-gray-700 text-white rounded-full p-2 min-w-[120px] h-[50px] cursor-pointer shadow-lg"
+            >
+              <h1>Event</h1>
+
+              <BsCalendar />
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.01 }}
+              whileTap={{ scale: 0.9 }}
+              className=" text-sm md:text-[17px] flex flex-row items-center content-center justify-center gap-2 bg-gray-700 text-white rounded-full p-2 min-w-[120px] h-[50px] cursor-pointer shadow-lg"
+            >
+              <h1>Donation</h1>
+
+              <HiCurrencyDollar />
             </motion.div>
           </motion.div>
         ) : (
