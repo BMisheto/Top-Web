@@ -13,10 +13,8 @@ import PostsPage from "./pages/dashboard/PostsPage";
 import DonatePage from "./pages/dashboard/DonatePage";
 import Account from "./pages/account/Account";
 import ProfileEdit from "./pages/account/ProfileEdit";
-import NormalPost from "./pages/posts/NormalPost";
-import AddPoll from "./pages/posts/AddPoll";
 import Events from "./pages/events/Events";
-import EventsPage from "./pages/dashboard/EventsPage"
+import EventsPage from "./pages/dashboard/EventsPage";
 import EventsDetails from "./pages/events/EventsDetails";
 import DonationDetails from "./pages/donations/DonationDetails";
 import DashProfile from "./pages/dashboard/DashProfile";
@@ -29,6 +27,10 @@ import DashCreatePostPage from "./pages/dashboard/posts/DashCreatePostPage";
 import DashCreateEventPage from "./pages/dashboard/events/DashCreateEventPage";
 import DashCreateDonationPage from "./pages/dashboard/donations/DashCreateDonationPage";
 import AdminRoute from "./routes/AdminRoute";
+import MakeDonation from "./pages/donations/MakeDonation";
+import AllMyPosts from "./pages/account/posts/AllMyPosts";
+import ProfilePostEdit from "./pages/account/posts/ProfilePostEdit";
+import CreatePost from "./pages/account/posts/CreatePost";
 
 function App() {
   return (
@@ -45,141 +47,175 @@ function App() {
 
           <Route path="/events" element={<Events />} />
           <Route path="/events/:id" element={<EventsDetails />} />
-          
-          
-
 
           <Route path="/donate" element={<Donations />} />
+          <Route path="/donate/make-donation/:id" element={<MakeDonation />} />
           <Route path="/donate/:id" element={<DonationDetails />} />
 
           {/* login,register & password reset */}
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/reset-password/:encoded_pk/:token/" element={<ResetPasswordPage />} />
+          <Route
+            path="/reset-password/:encoded_pk/:token/"
+            element={<ResetPasswordPage />}
+          />
+
+          <Route
+            path="/account"
+            element={
+              <PrivateRoute>
+                <Account />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/account/posts"
+            element={
+              <PrivateRoute>
+                <AllMyPosts />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/account/posts/:id/edit"
+            element={
+              <PrivateRoute>
+                <ProfilePostEdit />
+              </PrivateRoute>
+            }
+          />
 
 
+          <Route
+            path="/feed/create/post"
+            element={
+              <PrivateRoute>
+                <CreatePost />
+              </PrivateRoute>
+            }
+          />
 
-          <Route path="/account" element={
-            <PrivateRoute>
-                 <Account />
-
-            </PrivateRoute>
-          
-       } />
-          <Route path="/account/edit" element={
-            <PrivateRoute>
-              <ProfileEdit />
-
-            </PrivateRoute>
-          } />
-
-
-
-          
+          <Route
+            path="/account/edit"
+            element={
+              <PrivateRoute>
+                <ProfileEdit />
+              </PrivateRoute>
+            }
+          />
 
           {/* Dashboard */}
-          <Route path="/dashboard" element={
-          
-          <AdminRoute>
-            <Dashboard />
+          <Route
+            path="/dashboard"
+            element={
+              <AdminRoute>
+                <Dashboard />
+              </AdminRoute>
+            }
+          />
 
-          </AdminRoute>
-          
-          } />
+          <Route
+            path="/dashboard/profile"
+            element={
+              <AdminRoute>
+                <DashProfile />
+              </AdminRoute>
+            }
+          />
 
+          <Route
+            path="/dashboard/users"
+            element={
+              <AdminRoute>
+                <UsersPage />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/dashboard/users/:id"
+            element={
+              <AdminRoute>
+                <Dashboard />
+              </AdminRoute>
+            }
+          />
 
-          <Route path="/dashboard/profile" element={
+          <Route
+            path="/dashboard/events"
+            element={
+              <AdminRoute>
+                <EventsPage />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/dashboard/events/:id/edit"
+            element={
+              <AdminRoute>
+                <DashEventEditPage />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/dashboard/events/create"
+            element={
+              <AdminRoute>
+                <DashCreateEventPage />
+              </AdminRoute>
+            }
+          />
 
-            <AdminRoute>
-                   <DashProfile />
-
-            </AdminRoute>
-          
-          
-     } />
-
-
-          
-          
-
-
-          <Route path="/dashboard/users" element={
-            <AdminRoute>
-               <UsersPage />
-
-            </AdminRoute>
-          
-         } />
-          <Route path="/dashboard/users/:id" element={
-            <AdminRoute>
-              <Dashboard />
-
-            </AdminRoute>
-          
-          } />
-
-          <Route path="/dashboard/events" element={
-            <AdminRoute>
-               <EventsPage />
-
-            </AdminRoute>
-         } />
-          <Route path="/dashboard/events/:id/edit" element={
-            <AdminRoute>
-               <DashEventEditPage />
-
-            </AdminRoute>
-          
-         } />
-          <Route path="/dashboard/events/create" element={
-            <AdminRoute>
-               <DashCreateEventPage />
-
-            </AdminRoute>
-          
-         } />
-
-          <Route path="/dashboard/posts" element={
-            <AdminRoute>
-              <PostsPage />
-
-            </AdminRoute>
-          } />
-          <Route path="/dashboard/posts/:id/edit" element={
-            <AdminRoute>
+          <Route
+            path="/dashboard/posts"
+            element={
+              <AdminRoute>
+                <PostsPage />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/dashboard/posts/:id/edit"
+            element={
+              <AdminRoute>
                 <DashPostEditPage />
-
-            </AdminRoute>
-          
-        } />
-          <Route path="/dashboard/posts/create" element={
-            <AdminRoute>
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/dashboard/posts/create"
+            element={
+              <AdminRoute>
                 <DashCreatePostPage />
+              </AdminRoute>
+            }
+          />
 
-            </AdminRoute>
-          
-        } />
-
-
-          <Route path="/dashboard/donate" element={
-            <AdminRoute>
-              <DonatePage />
-
-            </AdminRoute>
-          } />
-          <Route path="/dashboard/donate/:id/edit" element={
-            <AdminRoute>
-              <DashDonationEditPage />
-
-            </AdminRoute>
-          } />
-          <Route path="/dashboard/donate/create" element={
-            <AdminRoute>
-              <DashCreateDonationPage />
-
-            </AdminRoute>
-          } />
+          <Route
+            path="/dashboard/donate"
+            element={
+              <AdminRoute>
+                <DonatePage />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/dashboard/donate/:id/edit"
+            element={
+              <AdminRoute>
+                <DashDonationEditPage />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/dashboard/donate/create"
+            element={
+              <AdminRoute>
+                <DashCreateDonationPage />
+              </AdminRoute>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </div>
