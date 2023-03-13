@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { AiFillLeftCircle, AiFillRightCircle, AiOutlineLogout } from "react-icons/ai";
-import { BsPersonFill } from "react-icons/bs";
+import {
+  AiFillLeftCircle,
+  AiFillRightCircle,
+  AiOutlineLogout,
+} from "react-icons/ai";
+import { BsArrowLeft, BsPersonFill } from "react-icons/bs";
 import { VscDashboard, VscEdit } from "react-icons/vsc";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router";
@@ -8,8 +12,13 @@ import { getUserDetails, logout } from "../../features/actions/userActions";
 import { USER_UPDATE_PROFILE_RESET } from "../../features/constants/userConstants";
 import { motion } from "framer-motion";
 import { REACT_APP_URL } from "../../utilities/utils";
+import MyDonationPage from "./MyDonationPage";
+import MyEventsPage from "./MyEventsPage";
+import MyPostsPage from "./MyPostsPage";
 
 function Account() {
+
+  const [active, setActive] = useState(1);
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
@@ -83,19 +92,19 @@ function Account() {
           {/* navigation */}
           <div className="flex flex-row justify-between items-center content-center w-[90%] md:w-3/4">
             {/* bac to profile */}
-            <button
+            <motion.div
               onClick={() => navigate(-1)}
-              className="flex flex-row items-center content-center justify-center gap-2 transition duration-75 delay-75 text-[12px] md:text-[16px] text-blue-600 p-2 rounded-md    font-[500]  group "
+              className="mb-[20px] flex flex-row items-center content-center justify-center text-gray-500 hover:text-black min-w-[100px] rounded-full p-1 md:p-2 gap-1 md:gap-2 cursor-pointer"
             >
-              <AiFillLeftCircle className="text-lg md:text-xl" />
-              <h1> Back </h1>
-            </button>
+              <BsArrowLeft />
+              <h1>Back</h1>
+            </motion.div>
 
             {/* dashboard */}
             {user.is_staff && (
               <button
                 onClick={() => navigate("/dashboard")}
-                className="flex flex-row items-center content-center justify-center gap-2 transition duration-150 delay-150 ease-in-out text-[12px] md:text-[16px] text-blue-600 p-2 md:p-3 rounded-md md:rounded-lg border hover:bg-blue-600 hover:border-blue-600 hover:text-white   font-[500]  group "
+                className="flex flex-row items-center content-center justify-center gap-2 transition duration-150 delay-150 ease-in-out text-[12px] md:text-[16px] text-blue-600 p-2 md:p-3 rounded-lg md:rounded-xl border hover:bg-blue-600 hover:border-blue-600 hover:text-white   font-[500]  group "
               >
                 <h1 className=""> Dashboard </h1>
                 <VscDashboard className="text-lg md:text-xl " />
@@ -109,113 +118,82 @@ function Account() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 1, scale: 1 }}
-              className="flex flex-row justify-around items-start content-center   gap-4  w-auto rounded-xl  border-t border-r border-l  p-2 md:p-3 "
+              className="flex flex-row justify-around md:items-start content-center   gap-4  w-auto rounded-xl  border-t border-r border-l  p-2 md:p-3 "
             >
               {/* Profile info */}
 
-              <div className="flex flex-col gap-2 p-1 md:p-0 ">
+              <div className="flex flex-col items-center content-center justify-center md:flex-row gap-2 p-2 md:p-0 ">
                 {/* image */}
 
                 <div className="">
                   <img
                     src={`${REACT_APP_URL}${user.profile_photo}`}
-                    className=" w-[250px] h-[200px] md:w-[300px] md:h-[250px]   object-center object-cover rounded-lg  drop-shadow-xl"
+                    className=" w-[250px] h-[250px]   object-center object-cover rounded-full  "
                     alt="profile photo"
                   />
                 </div>
 
-                {/* mobile navigation */}
-                <div className="flex md:hidden flex-row justify-between items-center content-center p-2  w-full text-[13px]">
-                  {/* profile */}
-                  <div className="flex flex-row justify-center items-center content-center  gap-1 rounded-md p-1 min-w-[70px] bg-black text-white drop-shadow-lg">
-                    <BsPersonFill />
-                    <h1>Profile</h1>
-                  </div>
+                <div className="flex flex-col gap-1 text-sm md:text-[15px] items-center md:items-start content-center justify-center min-w-[300px] p-2 md:p-3">
+                  <h1 className="font-semibold text-lg border-b">
+                    {user.first_name}
+                    {"  "}
 
-                 
-                </div>
+                    {user.last_name}
+                  </h1>
 
-                {/* profile detail */}
-                <div className="flex flex-col gap-[2px] p-1 md:p-2 bg-[#fafafa] border-t border-r border-l rounded-lg">
-                  {/* firstname */}
-                  <div
-                    className="flex flex-row justify-between
-                              bg-white text-[13px] p-2 md:p-3 rounded-lg   "
-                  >
-                    <h1 className="text-gray-700 font-[400]">Firstname:</h1>
-                    <h2> {user.first_name}</h2>
-                  </div>
+                  <h1 className="font-regular max-w-xs text-gray-500">
+                    {user.bio}
+                  </h1>
+                  <h1 className="font-regular text-gray-500">{user.company}</h1>
 
-                  {/* lastname */}
-                  <div
-                    className="flex flex-row justify-between
-                              bg-white text-[13px] p-2 md:p-3 rounded-lg "
-                  >
-                    <h1 className="text-gray-700 font-[400]">Lastname:</h1>
-                    <h2> {user.last_name}</h2>
-                  </div>
+                  <div className="flex flex-row  items-center content-center justify-between gap-3 w-full">
+                    {/* edit profile */}
 
-                  {/* email */}
-                  <div
-                    className="flex flex-row justify-between
-                              bg-white text-[13px] p-2 md:p-3 rounded-lg  "
-                  >
-                    <h1 className="text-gray-700 font-[400]">Email:</h1>
-                    <h2> {userInfo.email}</h2>
-                  </div>
+                    <div
+                      onClick={() => navigate("/account/edit")}
+                      className="cursor-pointer flex flex-row justify-center content-center items-center gap-1 text-sm text-green-500 hover:text-green-600"
+                    >
+                      <span>
+                        <VscEdit />
+                      </span>
+                      <h1>Edit Info</h1>
+                    </div>
 
-                  {/* phone number */}
-                  <div
-                    className="flex flex-row justify-between
-                              bg-white text-[13px] p-2 md:p-3 rounded-lg   "
-                  >
-                    <h1 className="text-gray-700 font-[400]">Mobile:</h1>
-                    <h2> {userInfo.mobile}</h2>
-                  </div>
+                    {/* logout profile */}
 
-                  {/* Country*/}
-                  <div
-                    className="flex flex-row justify-between
-                              bg-white text-[13px] p-2 md:p-3 rounded-lg   "
-                  >
-                    <h1 className="text-gray-700 font-[400]">Country:</h1>
-                    <h2> {userInfo.country}</h2>
-                  </div>
-                </div>
-
-                {/* edit and logout */}
-                <div
-                  className="flex flex-row justify-between
-                              bg-white text-[13px]   rounded-lg "
-                >
-                  {/* edit profile */}
-
-                  <div
-                    onClick={() => navigate("/account/edit")}
-                    className="transition duration-100 delay-100 ease-in-out flex flex-row justify-center items-center content-center gap-1  text-[12px] md:text-[14px] text-green-600 cursor-pointer bg-white border hover:bg-green-500 hover:text-white hover:border-green-500 hover:drop-shadow-lg hover:shadow-green-600/50 h-[35px] min-w-[100px] rounded-md"
-                  >
-                    <span>
-                      <VscEdit />
-                    </span>
-                    <h1>Edit Info</h1>
-                  </div>
-
-                  {/* edit profile */}
-
-                  <div
-                    onClick={logoutHandler}
-                    className="transition duration-100 delay-100 ease-in-out flex flex-row justify-center items-center content-center gap-1  text-[12px] md:text-[14px] text-red-600 cursor-pointer bg-white border hover:bg-red-500 hover:text-white hover:border-red-500 hover:drop-shadow-lg hover:shadow-red-600/50 h-[35px] min-w-[100px] rounded-md"
-                  >
-                    <h1>Logout</h1>
-                    <span>
-                      <AiOutlineLogout />
-                    </span>
+                    <div
+                      onClick={logoutHandler}
+                      className=" cursor-pointer flex flex-row justify-center content-center items-center gap-1 text-sm text-red-500 hover:text-red-600"
+                    >
+                      <h1>Logout</h1>
+                      <span>
+                        <AiOutlineLogout />
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
             </motion.div>
+          </motion.div>
 
+          <motion.div className="p-2 md:p-3 w-full md:w-[60%] mx-auto">
+
+            <div className="flex flex-row justify-center items-center content-center gap-2">
+              <h1 onClick={() => setActive
+              (1)} className="bg-gray-100 p-2 rounded-lg">Posts</h1>
+              <h1 onClick={() => setActive
+              (2)} className="bg-gray-100 p-2 rounded-lg">Posts</h1>
+              <h1 onClick={() => setActive
+              (3)} className="bg-gray-100 p-2 rounded-lg">Posts</h1>
+             
+            </div>
+          {active === 3 && <MyDonationPage  key={3} /> }
+          {active === 2 && <MyEventsPage  key={2} /> }
+          {active === 1 && <MyPostsPage  key={1} /> }
+                                    
            
+
+              
           </motion.div>
         </div>
       </div>

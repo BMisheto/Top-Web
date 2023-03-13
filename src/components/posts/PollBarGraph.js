@@ -12,13 +12,13 @@ import {
 function PollBarGraph({ data }) {
   console.log(data);
   return (
-    <div className="flex flex-col items-start justify-center content-center gap-2 md:gap-3 border-b border-l border-r rounded-xl">
-      <div className="w-full text-center">
-        <h1 className="  p-1 md:p-2  font-semibold text-gray-600">Bar Graph</h1>
+    <div className="flex flex-col items-start justify-center content-center gap-2  border-b  border-r border-gray-100 rounded-xl p-1 md:p-2">
+      <div className="w-full text-center p-1">
+        <h1 className="  font-regular text-gray-400">Bar Graph</h1>
       </div>
 
-      <div className="p-1 md:p-2">
-        <BarChart width={400} height={400} data={data}>
+      <div className="">
+        <BarChart width={300} height={300} data={data}>
           <XAxis dataKey="choice_text" />
           <YAxis />
           <Tooltip />

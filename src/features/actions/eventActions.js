@@ -54,8 +54,6 @@ export const listEventDetails = (id) => async (dispatch) => {
       type: EVENT_DETAILS_REQUEST,
     });
 
-   
-
     const config = {
       headers: {
         "Content-Type": "application/json",

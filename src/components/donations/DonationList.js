@@ -48,7 +48,7 @@ function DonationList() {
 
     {donations == 0 & !loading ? (
       <div className="flex flex-col  justify-center items-center content-center min-h-[300px] min-w-[200px] md:min-w-[300px] md:w-[90%] bg-gray-50 border border-gray-100 rounded-xl">
-      <h1 className="text-gray-500 text-md md:text-xl">0 Events</h1>
+      <h1 className="text-gray-500 text-md md:text-xl">0 Donation</h1>
     </div>
 
 

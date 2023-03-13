@@ -21,9 +21,9 @@ function AdminBar() {
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.9, opacity: 0 }}
-          whileHover={{ scale: 1.1 }}
+         
           whileTap={{ scale: 0.9 }}
-          className="p-1 md:p-2   rounded-xl cursor-pointer  bg-blue-600"
+          className="p-1 md:p-2   rounded-md cursor-pointer  bg-blue-600"
           onClick={showSidebar}
         >
           <AiOutlineMenu className="text-white text-lg   m-1 " />

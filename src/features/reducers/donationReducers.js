@@ -20,7 +20,7 @@ import {
   
   
   /* REDUCER USED IN HomeScreen COMPONENT */
-  export const donationListReducer = (state = { doantions: [] }, action) => {
+  export const donationListReducer = (state = { donations: [] }, action) => {
     switch (action.type) {
       case DONATION_LIST_REQUEST:
         return {

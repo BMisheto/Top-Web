@@ -36,7 +36,7 @@ function PostPoll({postId}) {
       ) : (
         <div className="flex flex-col gap-2 md:gap-3 p-1 md:p-2">
           <h1 className="text-md text-gray-500">
-            Total Votes:<span className="text-gray-500"></span>{" "}
+            Votes<span className="text-gray-500"></span>{" "}
           </h1>
           {polls?.map((poll) => (
             <PollItem

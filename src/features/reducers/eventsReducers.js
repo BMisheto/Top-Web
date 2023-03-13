@@ -24,7 +24,7 @@ import {
       case EVENT_LIST_REQUEST:
         return {
           loading: true,
-          products: [],
+          events: [],
         };
   
       case EVENT_LIST_SUCCESS:

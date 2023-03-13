@@ -106,7 +106,7 @@ function DashEdit() {
   const updatePollHandler = (e) => {
     e.preventDefault();
     
-    console.log(e)
+
     dispatch(createPoll(postId));
   };
  

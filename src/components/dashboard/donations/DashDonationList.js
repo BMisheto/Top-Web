@@ -11,6 +11,7 @@ import DashDonationItem from './DashDonationItem';
 import Search from '../../search/Search';
 import { HiCurrencyDollar } from "react-icons/hi";
 import AdminSearch from '../navigation/AdminSearch';
+import Paginate from '../navigation/Paginate';
 
 
 
@@ -85,7 +86,7 @@ function DashDonationList() {
 
     </div>
 
-    <div className="w-full">
+    <div className="w-full flex flex-col items-center content-center justify-center">
         <AdminSearch />
 
     </div>
@@ -101,14 +102,14 @@ function DashDonationList() {
 
 {donations == 0 & !loading ? (
   <div className="flex flex-col  justify-center items-center content-center min-h-[300px] min-w-[200px] md:min-w-[300px] md:w-[90%] bg-gray-50 border border-gray-100 rounded-xl">
-  <h1 className="text-gray-500 text-md md:text-xl">0 Events</h1>
+  <h1 className="text-gray-500 text-md md:text-xl">0 Donate</h1>
 </div>
 
 
 ) : (
   <div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 justify-center content-center items-center gap-3 md:gap-4   ">
     {donations?.map((donation) => (
-      <DashDonationItem donation={donation} />
+      <DashDonationItem key={donation._id} donation={donation} />
     )
     )}
   
@@ -117,6 +118,14 @@ function DashDonationList() {
 </div>
 
 )}
+
+ {/* pagination */}
+ <Paginate
+        page={page}
+        pages={pages}
+        keyword={keyword}
+        route="/dashboard/donate"
+      />
 
 
 

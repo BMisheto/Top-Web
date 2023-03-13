@@ -52,6 +52,11 @@ import {
   eventListReducer,
   eventUpdateReducer,
 } from "../features/reducers/eventsReducers";
+import {
+  attendingAddReducer,
+  attendingListReducer,
+  attendingRemoveReducer,
+} from "../features/reducers/attendingReducers";
 
 /* COMBINED REDUCER */
 const reducer = combineReducers({
@@ -87,6 +92,10 @@ const reducer = combineReducers({
   eventCreate: eventCreateReducer,
   eventUpdate: eventUpdateReducer,
 
+  attendingList: attendingListReducer,
+  attendingRemove: attendingRemoveReducer,
+  attendingAdd: attendingAddReducer,
+
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
@@ -96,7 +105,6 @@ const reducer = combineReducers({
   userUpdate: userUpdateReducer,
   userEmailCheck: userEmailCheckReducer,
   userPasswordReset: userResetPasswordReducer,
-
 });
 
 /* PULLING DATA OUT OF LOCAL STORAGE AND LOAD IT INTO INITIAL STATE */

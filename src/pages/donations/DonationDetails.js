@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from 'react'
-import { BsArrowLeft } from 'react-icons/bs';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router';
-import {listDonationDetails} from "../../features/actions/donationsActions"
-import { motion } from 'framer-motion';
-import { REACT_API_URL } from '../../utilities/utils';
-import { HiCurrencyDollar } from 'react-icons/hi';
-import { AiFillCloseCircle } from 'react-icons/ai';
+import React, { useEffect, useState } from "react";
+import { BsArrowLeft } from "react-icons/bs";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router";
+import { listDonationDetails } from "../../features/actions/donationsActions";
+import { motion } from "framer-motion";
+import { REACT_API_URL } from "../../utilities/utils";
+import { HiCurrencyDollar } from "react-icons/hi";
+import { AiFillCloseCircle } from "react-icons/ai";
 
 function DonationDetails() {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-
-  const [modal, setModal] = useState(true);
+  const [modal, setModal] = useState(false);
 
   const getId = useParams();
   const donationId = getId.id;
@@ -26,141 +25,75 @@ function DonationDetails() {
     dispatch(listDonationDetails(donationId));
   }, [dispatch, donationId]);
 
-
-  console.log(donation)
   return (
-    <div className="subpixel-antialiased min-h-screen inset-0 flex flex-col justify-center items-center font-sans    mx-auto lg:justify-center lg:align-center lg:text-centen rounded-b-2xl p-3 mt-[100px] ">
+    <div className="subpixel-antialiased min-h-screen inset-0 flex flex-col justify-center items-center font-sans    mx-auto lg:justify-center lg:align-center lg:text-centen rounded-b-2xl p-3 mt-[50px] ">
       {/* central div */}
 
-      <div className="flex flex-col justify-center items-start content-center gap-3 md:gap-5 p-2 md:p-3">
+      <div className="flex flex-col justify-center items-start content-center gap-2 md:gap-3 p-2 md:p-3 w-full md:w-[80%] lg:w-[80%]">
         {/* back button */}
         <motion.div
-          whileHover={{ scale: 0.97 }}
           onClick={() => navigate(-1)}
-          className="mb-[50px] flex flex-row items-center content-center justify-center bg-black text-white min-w-[100px] rounded-full p-1 md:p-2 gap-1 md:gap-2 cursor-pointer"
+          className="mb-[20px] flex flex-row items-center content-center justify-center text-gray-500 hover:text-black min-w-[100px] rounded-full p-1 md:p-2 gap-1 md:gap-2 cursor-pointer"
         >
           <BsArrowLeft />
           <h1>Back</h1>
         </motion.div>
 
-        <div className="flex flex-col gap-2 md:grid md:grid-cols-2 md:gap-3">
+        <div className="flex flex-col lg:flex-row gap-3 justify-between items-start content-center ">
           {/* image and title */}
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col ">
             {/* title */}
-            <div className="flex flex-col gap-2 w-full">
+            <div className="flex flex-col  w-full">
               <img
                 src={`${REACT_API_URL}${donation.donation_cover}`}
-                className="w-full h-[400px] rounded-xl md:[600px] object-cover object-center drop-shadow-xl"
+                className="w-full h-[400px] md:h-auto md:w-full rounded-xl lg:w-full lg:h-[600px] object-cover object-center drop-shadow-xl"
               />
             </div>
 
             {/* title */}
-            
           </div>
           {/* description */}
-          <div className=" flex flex-col gap-2 md:gap-3  p-2 md:p-3 mt-5 md:mt-0">
-          <div className="flex flex-col gap-2 text-md font-bold">{donation?.name}</div>
-          <div className="flex flex-row justify-between  p-2 md:p-3 ">
-            <div className="flex flex-col gap-1 md:gap-2 justify-center  text-md items-start content-start">
-              <h1 className=" font-semibold text-sm text-gray-500">Date</h1>
-              <p className="text-sm border bg-gray-100 p-1 md:p-2 rounded-lg text-gray-600">{donation?.date}</p>
-
+          <div className=" flex flex-col gap-2  p-2  mt-5 md:mt-0">
+            <div className="flex flex-col gap-2 text-sm font-bold">
+              {donation?.name}
             </div>
-            <div className="flex flex-col gap-1 md:gap-2 justify-center  text-md items-end content-start">
-              <h1 className="  font-semibold text-sm text-gray-500">Donators</h1>
-              <p className="text-sm border bg-gray-100 p-1 md:p-2 rounded-lg text-gray-600">{donation.total}</p>
 
+            <div className="flex flex-row justify-between p-2  ">
+              <div className="flex flex-col gap-2 justify-center  text-md items-start content-start">
+                <h1 className="  font-semibold text-sm text-gray-500">
+                  Collected
+                </h1>
+                <p className="text-sm border bg-gray-100 p-2 rounded-lg text-gray-600">
+                  {/* 100000.00 */}
+                </p>
+              </div>
+              <div className="flex flex-col gap-2 justify-center  text-md items-end content-start">
+                <h1 className=" font-semibold text-sm text-gray-500">Target</h1>
+                <p className="text-sm border bg-gray-100 p-2 rounded-lg text-gray-600">
+                  {donation.target}
+                </p>
+              </div>
             </div>
-          </div>
-          <div className="flex flex-row justify-between p-2 md:p-3 ">
-            <div className="flex flex-col gap-1 md:gap-2 justify-center  text-md items-start content-start">
-              <h1 className="  font-semibold text-sm text-gray-500">Collected</h1>
-              <p className="text-sm border bg-gray-100 p-1 md:p-2 rounded-lg text-gray-600">100000.00</p>
 
-            </div>
-            <div className="flex flex-col gap-1 md:gap-2 justify-center  text-md items-end content-start">
-              <h1 className=" font-semibold text-sm text-gray-500">Target</h1>
-              <p className="text-sm border bg-gray-100 p-1 md:p-2 rounded-lg text-gray-600">{donation.target}</p>
+            <p className="max-w-2xl">{donation.description}</p>
 
-            </div>
-          </div>
-         
-            <p className="max-w-lg">{donation.description}</p>
-
-            <div className='w-full'>
-                <button
-                onClick={() => setModal(!modal)}
-                 className="self-end flex flex-row items-center justify-center content-center gap-2 border border-gray-400 text-green-500 hover:border-green-500 hover:bg-green-500 hover:text-white min-w-[100px] rounded-lg p-2 
-                ">Donate
-
+            <div className="w-full">
+              <motion.button
+                onClick={() => navigate(`/donate/make-donation/${donation._id}`)}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.99 }}
+                className="self-end flex flex-row items-center justify-center content-center gap-2  text-white bg-green-500 hover:border-green-500 hover:bg-green-500 hover:text-white min-w-[100px] rounded-xl w-full  rounded-lg p-2 h-[50px] hover:drop-shadow-xl 
+                "
+              >
+                Donate
                 <HiCurrencyDollar />
-
-
-                </button>
+              </motion.button>
             </div>
-           
           </div>
-
-
-          {modal && (
-
-<div className='fixed top-1/2 bottom-0  z-50 bg-gray-100 flex flex-col items-center content-center justify-center  border border-gray-300 w-[300px] md:w-[300px] rounded-xl'>
-  <div className='flex flex-col  p-2 md:p-3 gap-3 md:gap-4 items-center content-center justify-center'>
-    <div onClick={() => setModal(!modal)} className="cursor-pointer flex flex-row text-lg items-center content-center justify-center gap-2 md:gap-3">
-      <h1>close</h1>
-      <AiFillCloseCircle />
-      </div>
-    <div className='flex flex-row justify-start gap-2 md:gap-3'>
-    <input type="radio"  />
-      <h1 className='text-lg'>
-        Mpesa
-      </h1>
-      
-
-    </div>
-    <div className='flex flex-row justify-start gap-2 md:gap-3'>
-    <input type="radio"  />
-      <h1 className='text-lg'>
-        Tigo Pesa
-      </h1>
-      
-
-    </div>
-    <div className='flex flex-row justify-start gap-2 md:gap-3'>
-    <input type="radio"  />
-      <h1 className='text-lg'>
-        Mastercard
-      </h1>
-      
-
-    </div>
-    <div className='flex flex-row justify-start gap-2 md:gap-3'>
-    <input type="radio"  />
-      <h1 className='text-lg'>
-        Visa
-      </h1>
-      
-
-    </div>
-    <p className='bg-gray-300 text-center p-2 md:p-3 rounded-xl'>
-      We haven't activated this feature for now
-    </p>
-    
-   
-    </div>
-
-
-</div>
-
-
-
-          )}
-
-        
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default DonationDetails
+export default DonationDetails;

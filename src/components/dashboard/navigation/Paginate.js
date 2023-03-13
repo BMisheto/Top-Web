@@ -13,7 +13,7 @@ function Paginate({ page, pages, keyword = "", route }) {
   return (
     pages > 1 && (
         <div className="flex flex-row items-center content-center justify-center max-w-[90%] text-[12px] p-1  md:p-5  h-[60px]  gap-1  md:gap-3  border-gray-200 ">
-          {(page == 0) | (pages == 1) ? (
+          {(page == 0) | (pages == 1) | (page ==1) ? (
             ""
           ) : (
             <div

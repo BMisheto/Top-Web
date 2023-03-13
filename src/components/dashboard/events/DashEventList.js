@@ -9,6 +9,7 @@ import { BsCalendarPlus } from 'react-icons/bs';
 import Search from "../../../components/search/Search"
 import { EVENT_CREATE_RESET } from '../../../features/constants/eventCostants';
 import AdminSearch from '../navigation/AdminSearch';
+import Paginate from '../navigation/Paginate';
 
 function DashEventList() {
     const dispatch = useDispatch();
@@ -82,7 +83,7 @@ function DashEventList() {
 
         </div>
 
-        <div className="w-full">
+        <div className="w-full flex flex-col items-center content-center justify-center">
             <AdminSearch />
 
         </div>
@@ -103,7 +104,7 @@ function DashEventList() {
 
 
     ) : (
-      <div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 justify-center content-center items-center gap-3 md:gap-4   ">
+      <div className="flex flex-col md:grid md:grid-cols-2 w-full lg:grid-cols-3 justify-center content-center items-center gap-3 md:gap-4   ">
         {events?.map((event) => (
           <DashEventItem key={event._id} event={event} />
         )
@@ -114,6 +115,14 @@ function DashEventList() {
     </div>
 
     )}
+
+     {/* pagination */}
+     <Paginate
+        page={page}
+        pages={pages}
+        keyword={keyword}
+        route="/dashboard/events"
+      />
 
     
 

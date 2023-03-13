@@ -21,13 +21,13 @@ function PostComments() {
   }, [dispatch, postId]);
 
   return (
-    <div className="flex flex-col items-start content-center justify-center">
+    <div className="flex flex-col items-center content-center justify-center border-t">
       {loading ? (
         <div className="min-w-[300px] min-h-[100px] bg-gray-100 animate-pulse rounded-xl flex flex-col items-center justify-center ">
           Loading
         </div>
       ) : (
-        <div className="flex flex-col gap-2 md:gap-3 md:grid md:grid-cols-2 justify-center items-center content-center">
+        <div className="flex flex-col gap-2 divide-y  justify-center items-center content-center">
         {comments?.map((comment) => (
           <CommentItem key={comment._id} comment={comment} />
         ))}

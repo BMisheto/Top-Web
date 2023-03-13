@@ -24,7 +24,7 @@ function AdminSearch() {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 1, scale: 1 }}
       onSubmit={handleSubmit}
-      className="border flex flex-row justify-center items-center content-center rounded-lg w-full h-full  min-h-[50px] p-1 bg-[#fafafa]"
+      className="border flex flex-row justify-center items-center content-center rounded-2xl w-full md:w-[600px] h-full  min-h-[50px] p-1 bg-[#fafafa]"
     >
       <input
         type="text"

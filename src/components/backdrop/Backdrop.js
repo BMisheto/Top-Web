@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const Backdrop = ({ children, onClick }) => {
   return (
-    <motion.div className="absolute min-h-screen w-screen " onClick={onClick}>
+    <motion.div className="absolute h-auto w-auto " onClick={onClick}>
       {children}
     </motion.div>
   );

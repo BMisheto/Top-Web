@@ -101,7 +101,7 @@ function DashCreatePostPage() {
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     required
-                    placeholder="Title"
+                    placeholder="Product Name"
                   />
                 </div>
 
@@ -117,7 +117,7 @@ function DashCreatePostPage() {
                     value={link}
                     onChange={(e) => setLink(e.target.value)}
                     required
-                    placeholder="Link"
+                    placeholder="Product Name"
                   />
                 </div>
                 {/* event location */}
@@ -134,7 +134,7 @@ function DashCreatePostPage() {
                     type="checkbox"
                     checked={is_poll}
                     onChange={(e) => setPoll(e.target.checked)}
-                    placeholder="Poll "
+                    placeholder="Featured "
                   />
                 </div>
               </div>
@@ -147,7 +147,7 @@ function DashCreatePostPage() {
                   <textarea
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
-                    placeholder="Content"
+                    placeholder="Description"
                     className="p-2 border bg-none outline-none rounded-xl placeholder:text-gray-600
                                                   placeholder:text-[15px]
                                                   placeholder:pl-4 min-w-[300px] md:min-w-[320px] lg:min-w-[400px] h-full text-[15px] min-h-[200px]"
@@ -162,7 +162,7 @@ function DashCreatePostPage() {
                 type="submit"
                 className="self-end transition duration-100 delay-100 ease-in-out flex flex-row items-center content-center justify-center gap-2 md:gap-3  border-gray-200 bg-blue-600 text-white p-1 md:p-2 rounded-xl h-[50px] hover:drop-shadow-md hover:bg-blue-500 hover:border-blue-500 hover:text-white min-w-full md:min-w-[200px]"
               >
-                <h1>Update Post</h1>
+                <h1>Add Post</h1>
                 <MdUpdate />
               </button>
             </div>
@@ -209,6 +209,13 @@ function DashCreatePostPage() {
                   />
                 </div>
               ))}
+            </div>
+
+            <div onClick={addOption} className="cursor-pointer">
+              add option
+            </div>
+            <div onClick={removeOption} className="cursor-pointer">
+              remove option
             </div>
 
             {/* Offer and Featured */}

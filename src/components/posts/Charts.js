@@ -31,12 +31,12 @@ function Charts({ postId }) {
   }, [dispatch, postId]);
 
   return (
-    <div className="w-full flex flex-col items-center content-center justify-center gap-2 md:gap-3 p-1 md:p-2 min-h-[300px]">
-      <h1 className="self-start font-semibold text-gray-700">Results</h1>
+    <div className="w-full flex flex-col items-center content-center justify-center   p-2 min-h-[300px]">
+      <h1 className="self-start font-semibold text-gray-700 mb-[10px]">Results</h1>
 
       {/* charts */}
 
-      <div className="flex flex-col lg:flex-row items-center justify-center content-center gap-2 md:gap-3">
+      <div className="flex flex-col md:flex-row items-center justify-center content-center gap-2 ">
         {/* Tiny bar chart */}
         <PollBarGraph data={polls} />
         <PollPieChart data={polls} />

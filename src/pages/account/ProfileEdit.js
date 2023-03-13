@@ -33,6 +33,8 @@ function ProfileEdit() {
   const [email, setEmail] = useState("");
   const [country, setCountry] = useState("");
   const [mobile, setMobile] = useState("");
+  const [bio, setBio] = useState("");
+  const [company, setCompany] = useState("");
   const [password, setpassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [changePassword, setChangePassword] = useState(false);
@@ -100,6 +102,8 @@ function ProfileEdit() {
           mobile: mobile,
           country: country,
           email: email,
+          bio: bio,
+          company: company,
           password: password,
         })
       );

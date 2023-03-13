@@ -10,13 +10,13 @@ import {
 
 function PollPieChart({ data }) {
   return (
-    <div className="flex flex-col items-start justify-center content-center gap-2 md:gap-3 border-b border-l border-r rounded-xl">
+    <div className="flex flex-col items-start justify-center content-center gap-2  border-b border-l  border-gray-100 rounded-xl p-1 md:p-2">
       <div className="w-full text-center">
-        <h1 className="  p-1 md:p-2  font-semibold text-gray-600">Pie Chart</h1>
+        <h1 className="    font-regular text-gray-400">Pie Chart</h1>
       </div>
 
-      <div className="p-1 md:p-2">
-        <PieChart width={400} height={400}>
+      <div className="">
+        <PieChart width={300} height={300}>
           <Pie
             dataKey="votes"
             data={data}

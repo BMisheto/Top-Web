@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { AiOutlineSend } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { createComment } from "../../features/actions/commentActions";
 import Message from "../message/Message";
@@ -47,7 +48,7 @@ function CommentForm({ postId }) {
         </div>
       ) : (
         <div className="w-full flex flex-col gap-2 md:gap-3 p-1 md:p-2">
-          <h1 className="font-bold text-sm">Write a comment</h1>
+          <h1 className="font-bold text-[13px]">Write a comment</h1>
 
           <form
             onSubmit={handleSubmit}
@@ -56,15 +57,16 @@ function CommentForm({ postId }) {
             <textarea
             placeholder="Write your comment here"
               onChange={(e) => setContent(e.target.value)}
-              className="bg-gray-100 border rounded-xl w-full min-h-[100px] outline-none placeholder:text-sm placeholder:p-2 placeholder:opacity-60"
+              className="bg-gray-50 border rounded-md w-full min-h-[100px] outline-none placeholder:text-sm placeholder:p-2 placeholder:opacity-60"
             ></textarea>
 
             {content != "" && (
               <button
                 type="submit"
-                className=" border border-black min-w-[100px] rounded-full p-2 md:p-2 hover:bg-black hover:text-white"
+                className=" border border-black min-w-[100px] rounded-full p-2 md:p-3 hover:bg-black hover:border-black hover:text-white border-gray-200 text-gray-500 flex flex-row gap-1 items-center content-center justify-center"
               >
                 Comment
+                <AiOutlineSend />
               </button>
             )}
           </form>

@@ -26,7 +26,7 @@ function PostPage() {
   }, [dispatch, postId]);
 
   return (
-    <div className="subpixel-antialiased min-h-screen inset-0 flex flex-col justify-center items-center font-sans    mx-auto lg:justify-center lg:align-center lg:text-centen rounded-b-2xl p-3 mt-[100px] ">
+    <div className="subpixel-antialiased min-h-screen inset-0 flex flex-col justify-center items-center font-sans   lg:justify-center lg:align-center  p-3 mt-[100px] ">
       {/* central div */}
 
       {loading ? (
@@ -34,38 +34,37 @@ function PostPage() {
           <h1>Loading</h1>
 
         </div>
-      ):(<div className="flex flex-col justify-center items-start content-center gap-3 md:gap-5 p-2 md:p-3">
+      ):(<div className="flex flex-col justify-center items-start content-center gap-3  p-2 md:p-3 ">
         {/* back button */}
         <motion.div
-          whileHover={{ scale: 0.97 }}
           onClick={() => navigate(-1)}
-          className="mb-[50px] flex flex-row items-center content-center justify-center bg-black text-white min-w-[100px] rounded-full p-1 md:p-2 gap-1 md:gap-2 cursor-pointer"
+          className="mb-[20px] flex flex-row items-center content-center justify-center text-gray-500 hover:text-black min-w-[100px] rounded-full p-1 md:p-2 gap-1 md:gap-2 cursor-pointer"
         >
           <BsArrowLeft />
           <h1>Back</h1>
         </motion.div>
 
         {/* title */}
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-1 p-2">
           {post.is_poll ? (
-            <h1 className="text-lg font-bold">Question</h1>
+            <h1 className="text-sm font-bold ">Question</h1>
           ) : (
-            <h1 className="text-lg font-bold">Topic</h1>
+            <h1 className="text-sm font-bold ">Topic</h1>
           )}
 
-          <h1 className="text-lg md:text-xl">{post.title}</h1>
+          <h1 className="text-lg md:text-xl ">{post.title}</h1>
         </div>
 
         {/* description */}
-        <div className="">
-          <p className="max-w-2xl">
+        <div className="p-2">
+          <p className="max-w-2xl text-start">
             {post?.content}
           </p>
         </div>
 
         {/* polls */}
         {post.is_poll ? (
-          <div className="w-full">
+          <div className="w-full p-2">
           <PostPoll postId={postId}  />
 
           </div>
