@@ -114,9 +114,7 @@ function Account() {
           <motion.div className="flex flex-col md:flex-row gap-4 md:gap-5 justify-center items-center content-center w-full md:w-[80%]">
             {/* profile and orders */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 1, scale: 1 }}
+             
               className="flex flex-row justify-around md:items-start content-center   gap-4  w-auto rounded-xl    p-2 md:p-3 "
             >
               {/* Profile info */}
@@ -130,7 +128,7 @@ function Account() {
                 <div className="relative">
                   <img
                     src={`${REACT_APP_URL}${user.profile_photo}`}
-                    className=" w-[250px] h-[250px] md:w-[250px] md:h-[250px]   object-center object-cover rounded-full  "
+                    className=" w-[250px] h-[250px] md:w-[250px] md:h-[250px]   object-center object-cover rounded-full  shadow-lg"
                     alt="profile photo"
                   />
 
