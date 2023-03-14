@@ -40,11 +40,17 @@ function AttendingModal({ handleClose, event, isAttending }) {
     }
 
 
-    if(success | removeSuccess){
+    if(removeSuccess){
       window.location.reload();
     } else {
       return;
     }
+    if(success){
+      window.location.reload();
+    } else {
+      return;
+    }
+    
   }, [userInfo, success,removeSuccess]);
 
   const handleAttending = () => {
