@@ -1,8 +1,27 @@
-import React from 'react'
+import React from 'react';
+import { motion } from 'framer-motion';
+import MyDonations from '../../../components/account/MyDonations';
+
 
 function MyDonationPage() {
   return (
-    <div>MyDonationPage</div>
+    <motion.main className="">
+    <div className="  ">
+      {/* central div */}
+      <div className="">
+        
+      
+
+    
+
+        <MyDonations />
+
+      </div>
+
+
+      
+    </div>
+  </motion.main>
   )
 }
 

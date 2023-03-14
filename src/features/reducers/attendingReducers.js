@@ -56,7 +56,7 @@ export const attendingAddReducer = (state = {}, action) => {
     case ATTENDING_ADD_FAIL:
       return {
         loading: false,
-        error: action.payload.message,
+        error: action.payload,
       };
 
     case ATTENDING_ADD_RESET:

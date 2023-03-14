@@ -45,14 +45,9 @@ function PostItem({ post }) {
           </p>
         </div>
 
-        {/* <div className="flex flex-row justify-end it w-full ">
-          <Link
-           
-            className=" flex flex-row gap-2 items-center content-center justify-center min-w-[80px] p-1  border border-black text-black hover:bg-black hover:text-white rounded-full"
-          >
-            View
-          </Link>
-        </div> */}
+        <div>
+          
+        </div>
 
         
       </motion.div>

@@ -47,6 +47,35 @@ import {
     }
   };
   
+  /* REDUCER USED IN HomeScreen COMPONENT */
+  export const eventMyListReducer = (state = { events: [] }, action) => {
+    switch (action.type) {
+      case EVENT_LIST_REQUEST:
+        return {
+          loading: true,
+          events: [],
+        };
+  
+      case EVENT_LIST_SUCCESS:
+        return {
+          loading: false,
+          events: action.payload.events,
+          page: action.payload.page,
+          pages: action.payload.pages,
+          count: action.payload.count,
+        };
+  
+      case EVENT_LIST_FAIL:
+        return {
+          loading: false,
+          error: action.payload,
+        };
+  
+      default:
+        return state;
+    }
+  };
+  
   /* REDUCER USED IN ProductScreen COMPONENT */
   export const eventDetailsReducer = (state = { event: {} }, action) => {
     switch (action.type) {

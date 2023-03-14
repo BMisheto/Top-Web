@@ -12,9 +12,10 @@ import { REACT_APP_URL } from "../../utilities/utils";
 import axios from "axios";
 
 import Message from "../../components/message/Message";
-import { BsCheck, BsX } from "react-icons/bs";
+import { BsArrowLeft, BsCheck, BsX } from "react-icons/bs";
 import UploadingLoader from "../../components/loading/UploadingLoader";
 import { USER_UPDATE_PROFILE_RESET } from "../../features/constants/userConstants";
+import { HiOutlineUpload } from "react-icons/hi";
 
 function ProfileEdit() {
   const dispatch = useDispatch();
@@ -74,11 +75,14 @@ function ProfileEdit() {
 
         // FETCHING USER DATA
         dispatch(getUserDetails("profile"));
+        navigate("/account");
       } else {
         // WE HAVE THE USER INFO SO WE SET OUR STATE
         setFirstname(user.first_name);
         setLastname(user.last_name);
         setEmail(user.email);
+        setBio(user.bio);
+        setCompany(user.company);
         setMobile(user.mobile);
         setCountry(user.country);
         setProfile(user.profile_photo);
@@ -144,37 +148,46 @@ function ProfileEdit() {
   };
   return (
     <motion.main className="min-h-[500px]">
-      <div className="subpixel-antialiased min-h-screen inset-0 flex justify-center items-center font-sans    mx-auto  p-3  mt-[70px] ">
+      <div className="subpixel-antialiased min-h-screen inset-0 flex flex-col justify-center items-center font-sans    mx-auto  p-3  mt-[70px] ">
+        <div className="flex flex-row justify-between items-center content-center w-[90%] md:w-3/4">
+          {/* bac to profile */}
+          <motion.div
+            onClick={() => navigate(-1)}
+            className="mb-[20px] flex flex-row items-center content-center justify-center text-gray-500 hover:text-black min-w-[100px] rounded-full p-1 md:p-2 gap-1 md:gap-2 cursor-pointer"
+          >
+            <BsArrowLeft />
+            <h1>Back</h1>
+          </motion.div>
+        </div>
         {/* main div */}
         <div className="flex flex-col justify-start items-start content-start gap-3  md:gap-4 w-full md:w-[80%]">
           {/* Heading */}
-          <div className="flex flex-col items-start justify-start font-bold text-lg md:text-2xl">
+          <div className="flex flex-col items-start justify-start font-bold text-lg md:text-xl gap-2">
             <h1>Edit Profile</h1>
           </div>
 
-          <div className="flex flex-col lg:flex-row justify-start content-start items-start gap-2 md:gap-3 w-full">
+          <div className="flex flex-col lg:flex-row justify-start content-start items-start gap-2 md:gap-3 w-full ">
             {/* image */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 1, scale: 1 }}
-              className="flex flex-col md:flex-row justify-center md:justify-start gap-2 w-full bg-[#fafafa] rounded-xl p-1 md:p-2 border-t border-l border-r"
+            <div
+             
+              className="flex flex-col md:flex-row justify-center md:justify-start gap-2 w-full  rounded-xl p-1 md:p-2 mb-[30px] bg-gray-50 border border-gray-100"
             >
-              <div className="p-1 md:p-2 w-full">
+              <div className=" w-full flex flex-col gap-2 p-2 md:p-3">
+              <h1 className="text-[13px] md:text-[14px] font-semibold text-gray-500">Profile photo</h1>
                 <img
                   src={`${REACT_APP_URL}${profile}`}
-                  className=" h-[250px] w-full  md:h-[300px] md:w-[300px] rounded-xl object-center object-cover drop-shadow-xl shadow-blue-600/95"
+                  className=" h-[250px] w-full  md:h-[300px] md:w-[300px] rounded-xl object-center object-cover drop-shadow-lg shadow-blue-600/95"
                 />
               </div>
               {uploading ? (
                 <UploadingLoader />
               ) : (
-                <div className="p-1 md:p-2 w-full flex flex-col gap-2">
+                <div className="p-2 md:p-3 w-full flex flex-col gap-2">
                   <h1 className="text-[13px] md:text-[14px]">
                     Choose a new profile photo
                   </h1>
                   <input
-                    class="block w-full text-sm text-gray-900 bg-gray-50 rounded-md border border-gray-300 cursor-pointer focus:outline-none "
+                    class="block w-full text-sm text-gray-900 bg-white rounded-md border border-gray-100 cursor-pointer focus:outline-none "
                     aria-describedby="file_input_help"
                     id="file_input"
                     type="file"
@@ -186,27 +199,25 @@ function ProfileEdit() {
                   )}
                 </div>
               )}
-            </motion.div>
+            </div>
 
             {/* form */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 1, scale: 1 }}
-              className="transition duration-100 delay-100 ease-in-out bg-[#fafafa] border-t border-l border-r w-full rounded-lg p-1 md:p-2"
+            <div
+              
+              className="transition duration-100 delay-100 ease-in-out  w-full rounded-lg p-2 md:p-2"
             >
               <form
                 onSubmit={SubmitHandler}
-                className="flex flex-col justify-center space-y-3 content-center items-center gap-2 md:gap-3"
+                className="flex flex-col justify-center space-y-3 content-center items-center gap-3 md:gap-4"
               >
                 {/* items Edit */}
-                <div className="flex flex-col  space-y-3 md:space-y-0 md:grid md:grid-cols-2 gap-2 md:gap-3 w-full">
+                <div className="flex flex-col  space-y-3 md:space-y-0 md:grid md:grid-cols-2 gap-3 md:gap-4 w-full">
                   {/* firstname */}
                   <div className="flex  flex-col gap-1 ">
-                    <h1 className="text-[13px] md:text-[14px]">First Name:</h1>
+                    <h1 className="text-[13px] md:text-[14px] font-semibold text-gray-500">First Name:</h1>
                     <input
-                      className="p-2 border bg-none outline-none rounded-md placeholder:text-gray-600
-                                    placeholder:text-[13px] placeholder:pl-4 bg-white   text-[15px]"
+                      className="p-2 border border-gray-100 min-h-[50px] bg-none outline-none rounded-xl placeholder:text-gray-600
+                                    placeholder:text-[13px] placeholder:pl-4  text-[15px] "
                       value={firstname}
                       onChange={(e) => setFirstname(e.target.value)}
                       required
@@ -216,10 +227,10 @@ function ProfileEdit() {
 
                   {/* Lastname */}
                   <div className="flex  flex-col gap-1 ">
-                    <h1 className="text-[13px] md:text-[14px]">Last Name:</h1>
+                    <h1 className="text-[13px] md:text-[14px] font-semibold text-gray-500">Last Name:</h1>
                     <input
-                      className="p-2 border bg-none outline-none rounded-md placeholder:text-gray-600
-                                    placeholder:text-[13px] placeholder:pl-4 bg-white  text-[15px]"
+                     className="p-2 border border-gray-100 min-h-[50px] bg-none outline-none rounded-xl placeholder:text-gray-600
+                     placeholder:text-[13px] placeholder:pl-4  text-[15px] "
                       value={lastname}
                       onChange={(e) => setLastname(e.target.value)}
                       placeholder="Last name"
@@ -228,22 +239,24 @@ function ProfileEdit() {
 
                   {/* Email */}
                   <div className="flex  flex-col gap-1 ">
-                    <h1 className="text-[13px] md:text-[14px]">Email:</h1>
+                    <h1 className="text-[13px] md:text-[14px] font-semibold text-gray-500">Email:</h1>
                     <input
-                      className="p-2 border bg-none outline-none rounded-md placeholder:text-gray-600
-                                    placeholder:text-[13px] placeholder:pl-4 bg-white  text-[15px]"
+                       className="p-2 border border-gray-100 min-h-[50px] bg-none outline-none rounded-xl placeholder:text-gray-600
+                       placeholder:text-[13px] placeholder:pl-4  text-[15px] "
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="Email"
                     />
                   </div>
 
+                 
+
                   {/* Mobile */}
                   <div className="flex  flex-col gap-1 ">
-                    <h1 className="text-[13px] md:text-[14px]">Mobile:</h1>
+                    <h1 className="text-[13px] md:text-[14px] font-semibold text-gray-500">Mobile:</h1>
                     <input
-                      className="p-2 border bg-none outline-none rounded-md placeholder:text-gray-600
-                                    placeholder:text-[13px] placeholder:pl-4 bg-white  text-[15px]"
+                      className="p-2 border border-gray-100 min-h-[50px] bg-none outline-none rounded-xl placeholder:text-gray-600
+                      placeholder:text-[13px] placeholder:pl-4   text-[15px] "
                       value={mobile}
                       onChange={(e) => setMobile(e.target.value)}
                       placeholder="Mobile"
@@ -252,15 +265,40 @@ function ProfileEdit() {
 
                   {/* Country */}
                   <div className="flex  flex-col gap-1 ">
-                    <h1 className="text-[13px] md:text-[14px]">Country:</h1>
+                    <h1 className="text-[13px] md:text-[14px] font-semibold text-gray-500">Country:</h1>
                     <input
-                      className="p-2 border bg-none outline-none rounded-md placeholder:text-gray-600
-                                    placeholder:text-[13px] placeholder:pl-4 bg-white  text-[15px]"
+                       className="p-2 border border-gray-100 min-h-[50px] bg-none outline-none rounded-xl placeholder:text-gray-600
+                       placeholder:text-[13px] placeholder:pl-4  text-[15px] "
                       value={country}
                       onChange={(e) => setCountry(e.target.value)}
                       placeholder="Country"
                     />
                   </div>
+                </div>
+
+                 {/* Email */}
+                 <div className="flex  flex-col gap-1 w-full">
+                    <h1 className="text-[13px] md:text-[14px] font-semibold text-gray-500">company:</h1>
+                    <input
+                       className="p-2 border border-gray-100 min-h-[50px] bg-none outline-none rounded-xl placeholder:text-gray-600
+                       placeholder:text-[13px] placeholder:pl-4    text-[15px] "
+                      value={company}
+                      onChange={(e) => setCompany(e.target.value)}
+                      placeholder="Company"
+                    />
+                  </div>
+                {/* Email */}
+                <div className="flex  flex-col gap-1 w-full">
+                  <h1 className="text-[13px] md:text-[14px] font-semibold text-gray-500">Bio:</h1>
+                
+                  <textarea
+                     className="p-2 border border-gray-100   bg-none outline-none rounded-xl placeholder:text-gray-600
+                     placeholder:text-[13px] placeholder:pl-4  max-h-[160px]   text-[15px] "
+                    maxLength={150}
+                    value={bio}
+                    onChange={(e) => setBio(e.target.value)}
+                    placeholder="Bio"
+                  ></textarea>
                 </div>
 
                 {/* password */}
@@ -298,12 +336,12 @@ function ProfileEdit() {
                     >
                       {/* password */}
                       <div className="flex  flex-col gap-1 w-full">
-                        <h1 className="text-[13px] md:text-[14px]">
+                        <h1 className="text-[13px] md:text-[14px] font-semibold text-gray-500">
                           Password:
                         </h1>
                         <input
-                          className="p-2 border bg-none outline-none rounded-md placeholder:text-gray-600
-                                            placeholder:text-[13px] placeholder:pl-4 bg-white   text-[15px]"
+                          className="p-2 border min-h-[50px] bg-none outline-none rounded-xl placeholder:text-gray-600
+                          placeholder:text-[13px] placeholder:pl-4 bg-gray-50   text-[15px] "
                           type="password"
                           onChange={(e) => setpassword(e.target.value)}
                           placeholder="Password"
@@ -312,12 +350,12 @@ function ProfileEdit() {
 
                       {/* confirmPassword */}
                       <div className="flex  flex-col gap-1 w-full">
-                        <h1 className="text-[13px] md:text-[14px]">
+                        <h1 className="text-[13px] md:text-[14px] font-semibold text-gray-500">
                           Confirm Password:
                         </h1>
                         <input
-                          className="p-2 border bg-none outline-none rounded-md placeholder:text-gray-600
-                                            placeholder:text-[13px] placeholder:pl-4 bg-white   text-[15px]"
+                           className="p-2 border min-h-[50px] bg-none outline-none rounded-xl placeholder:text-gray-600
+                           placeholder:text-[13px] placeholder:pl-4 bg-gray-50   text-[15px] "
                           required
                           type="password"
                           onChange={(e) => setConfirmPassword(e.target.value)}
@@ -335,17 +373,18 @@ function ProfileEdit() {
                     className="flex flex-row justify-between items-center content-center gap-1  h-[35px] font-[450] text-red-600"
                   >
                     <h1>Cancel</h1>
-                    <BsX className="text-lg md:text-xl" />
+                    
                   </button>
                   <button
                     type="submit"
-                    className="flex flex-row justify-between items-center content-center gap-1  h-[35px]  rounded-md  text-green-600 font-[450] "
+                    className="flex flex-row justify-center items-center min-w-[100px] content-center gap-1  h-[35px]  rounded-2xl  bg-green-600 text-white p-2 font-[450] "
                   >
-                    <h1>Update</h1> <BsCheck className="text-lg md:text-xl" />
+                    <h1>Update</h1>
+                    <HiOutlineUpload className="text-lg md:text-xl" />
                   </button>
                 </div>
               </form>
-            </motion.div>
+            </div>
           </div>
 
           {/* navigation */}

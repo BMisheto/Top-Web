@@ -7,6 +7,7 @@ import { BsSearch } from "react-icons/bs";
 import { AiOutlineMenu, AiOutlineUser } from "react-icons/ai";
 import Sidebar from "./sidebar/Sidebar";
 import { REACT_API_URL } from "../../utilities/utils";
+import { HiUser } from "react-icons/hi";
 
 function Header() {
   // sidebar
@@ -38,7 +39,7 @@ function Header() {
         <Link className="" to="/">
           <img
             src="/logo-small.png"
-            className="h-[40px] w-[40px] md:h-[50px] md:w-[50px] object-center mt-3"
+            className="h-[40px] w-[40px] md:h-[30px] md:w-[30px] object-center "
             alt="logo"
           />
         </Link>
@@ -62,11 +63,12 @@ function Header() {
         {/* Account */}
         <div className="hidden p-1 md:p-1 lg:flex">
           <Link
-            className="flex lfex-row items-center content-center justify-center gap-2"
+            className="flex flex-row items-center content-center justify-center gap-2 text-[15px] font-[600] text-gray-600"
             to="/account"
           >
-            <h1 className="text-black font-bold">Account</h1>
-            <AiOutlineUser />
+            <h1 className=" ">Account</h1>
+            
+            <HiUser className="" />
 
             {/* <img
               src="/avatar.png"

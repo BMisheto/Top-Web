@@ -47,15 +47,28 @@ export const listEvents =
     }
   };
 
-
 export const listMyEvents =
-  (keyword = "",id) =>
-  async (dispatch) => {
+  (keyword = "") =>
+  async (dispatch, getState) => {
     try {
       dispatch({
         type: EVENT_LIST_REQUEST,
       });
-      const { data } = await axios.get(`${REACT_APP_URL}/events/${id}/myevents/${keyword}`);
+
+      const {
+        userLogin: { userInfo },
+      } = getState();
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+      const { data } = await axios.get(
+        `${REACT_APP_URL}/events/${userInfo._id}/myevents/${keyword}`,
+        config
+      );
 
       dispatch({
         type: EVENT_LIST_SUCCESS,

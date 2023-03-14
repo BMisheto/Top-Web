@@ -31,6 +31,12 @@ import MakeDonation from "./pages/donations/MakeDonation";
 import AllMyPosts from "./pages/account/posts/AllMyPosts";
 import ProfilePostEdit from "./pages/account/posts/ProfilePostEdit";
 import CreatePost from "./pages/account/posts/CreatePost";
+import CreateDonation from "./pages/account/donation/CreateDonation";
+import CreateEvent from "./pages/account/events/CreateEvent";
+import AllMyEvents from "./pages/account/events/AllMyEvents";
+import ProfileEventEdit from "./pages/account/events/ProfileEventEdit";
+import AllMyDonation from "./pages/account/donation/AllMyDonation";
+import ProfileDonationEdit from "./pages/account/donation/ProfileDonationEdit";
 
 function App() {
   return (
@@ -87,12 +93,60 @@ function App() {
             }
           />
 
+          <Route
+            path="/account/events"
+            element={
+              <PrivateRoute>
+                <AllMyEvents />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/account/events/:id/edit"
+            element={
+              <PrivateRoute>
+                <ProfileEventEdit />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/account/donations"
+            element={
+              <PrivateRoute>
+                <AllMyDonation />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/account/donations/:id/edit"
+            element={
+              <PrivateRoute>
+                <ProfileDonationEdit />
+              </PrivateRoute>
+            }
+          />
 
           <Route
             path="/feed/create/post"
             element={
               <PrivateRoute>
                 <CreatePost />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/feed/create/event"
+            element={
+              <PrivateRoute>
+                <CreateEvent />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/feed/create/donation"
+            element={
+              <PrivateRoute>
+                <CreateDonation />
               </PrivateRoute>
             }
           />

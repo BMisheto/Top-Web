@@ -47,6 +47,36 @@ import {
         return state;
     }
   };
+
+
+  /* REDUCER USED IN HomeScreen COMPONENT */
+  export const donationMyListReducer = (state = { donations: [] }, action) => {
+    switch (action.type) {
+      case DONATION_LIST_REQUEST:
+        return {
+          loading: true,
+         donations: [],
+        };
+  
+      case DONATION_LIST_SUCCESS:
+        return {
+          loading: false,
+          donations: action.payload.donations,
+          page: action.payload.page,
+          pages: action.payload.pages,
+          count: action.payload.count,
+        };
+  
+      case DONATION_LIST_FAIL:
+        return {
+          loading: false,
+          error: action.payload,
+        };
+  
+      default:
+        return state;
+    }
+  };
   
   /* REDUCER USED IN ProductScreen COMPONENT */
   export const donationDetailsReducer = (state = { donation: {} }, action) => {

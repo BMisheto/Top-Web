@@ -46,6 +46,44 @@ export const listDonations =
       });
     }
   };
+/* ACTION CREATOR USED IN HomeScreen COMPONENT */
+export const listMyDonations =
+  (keyword = "") =>
+  async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: DONATION_LIST_REQUEST,
+      });
+
+      const {
+        userLogin: { userInfo },
+      } = getState();
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+      const { data } = await axios.get(
+        `${REACT_APP_URL}/donations/${userInfo._id}/mydonations/${keyword}`,
+        config
+      );
+
+      dispatch({
+        type: DONATION_LIST_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: DONATION_LIST_FAIL,
+        payload:
+          error.response && error.response.data.detail
+            ? error.response.data.detail
+            : error.message,
+      });
+    }
+  };
 
 /* ACTION CREATOR USED IN ProductScreen COMPONENT */
 export const listDonationDetails = (id) => async (dispatch) => {
@@ -53,8 +91,6 @@ export const listDonationDetails = (id) => async (dispatch) => {
     dispatch({
       type: DONATION_DETAILS_REQUEST,
     });
-
-  
 
     const config = {
       headers: {

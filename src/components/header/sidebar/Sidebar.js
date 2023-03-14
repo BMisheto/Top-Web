@@ -1,16 +1,12 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Backdrop from "../../backdrop/Backdrop";
-import {
- 
-  BsX,
-} from "react-icons/bs";
+import { BsX } from "react-icons/bs";
 
 import { Link, useNavigate } from "react-router-dom";
-import {CgFeed, CgCalendar} from "react-icons/cg"
-import {HiCurrencyDollar} from "react-icons/hi"
-import {FaUser} from "react-icons/fa"
-
+import { CgFeed, CgCalendar } from "react-icons/cg";
+import { HiCurrencyDollar, HiUser } from "react-icons/hi";
+import { FaUser } from "react-icons/fa";
 
 function Sidebar({ handleClose }) {
   const navigate = useNavigate();
@@ -20,10 +16,10 @@ function Sidebar({ handleClose }) {
       <motion.div
         animate={{ right: 0, opacity: 1 }}
         initial={{ right: -100, opacity: 0 }}
-        exit={{ right: -800, opacity: 0 }}
+        exit={{ right: -100, opacity: 0 }}
         onClick={(e) => e.stopPropagation()}
         className=" text-gray-800 fixed top-0 right-0  min-h-[94%] w-[50%] md:w-[30%] border border-gray-100  bg-[#fafafa] flex flex-col justify-evenly items-center content-center lg:hidden xl:hidden drop-shadow-xl shadow-gray-300/75  rounded-2xl   m-4"
-      > 
+      >
         {/* social */}
 
         <div className="w-1/2 flex flex-row items-center content-center justify-around font-[600] text-gray-600">
@@ -41,9 +37,13 @@ function Sidebar({ handleClose }) {
         {/* navigation */}
         <nav className="flex flex-col space-y-5  text-[14px] font-[600] items-start content-center justify-center text-gray-800">
           <div className="p-2 hover:text-orange-500 hover:bg-gray-100 rounded-lg">
-            <Link to="/" className="flex flex-row items-center content-center justify-center gap-2 md:gap-3">
-                <CgFeed className="text-lg md:text-xl" />
-                <h1 className="text-md ">Feed</h1></Link>
+            <Link
+              to="/"
+              className="flex flex-row items-center content-center justify-center gap-2 md:gap-3"
+            >
+              <CgFeed className="text-lg md:text-xl" />
+              <h1 className="text-md ">Feed</h1>
+            </Link>
           </div>
 
           <div className="p-2 hover:text-orange-500 hover:bg-gray-100 rounded-lg">
@@ -51,7 +51,7 @@ function Sidebar({ handleClose }) {
               to="/events"
               className="flex flex-row items-center content-center justify-center gap-2 md:gap-3"
             >
-              <CgCalendar className="text-lg md:text-xl"/>
+              <CgCalendar className="text-lg md:text-xl" />
               <h1 className="text-md ">Events</h1>
             </Link>
           </div>
@@ -59,15 +59,23 @@ function Sidebar({ handleClose }) {
           {/*Account Popup */}
 
           <div className="p-2 hover:text-orange-500 hover:bg-gray-100 rounded-lg">
-            <Link to="/Donate" className="flex flex-row items-center content-center justify-center gap-2 md:gap-3">
-                <HiCurrencyDollar className="text-lg md:text-xl"/>
-                  <h1 className="text-md ">Donate</h1></Link>
+            <Link
+              to="/Donate"
+              className="flex flex-row items-center content-center justify-center gap-2 md:gap-3"
+            >
+              <HiCurrencyDollar className="text-lg md:text-xl" />
+              <h1 className="text-md ">Donate</h1>
+            </Link>
           </div>
 
           <div className="p-2 hover:text-orange-600 hover:bg-gray-100 rounded-lg">
-            <Link to="/account" className="flex flex-row items-center content-center justify-center gap-2 md:gap-3">
-                <FaUser />
-                <h1>Account</h1></Link>
+            <Link
+              to="/account"
+              className="flex flex-row items-center content-center justify-center gap-2 md:gap-3"
+            >
+              <HiUser className="" />
+              <h1>Account</h1>
+            </Link>
           </div>
         </nav>
 

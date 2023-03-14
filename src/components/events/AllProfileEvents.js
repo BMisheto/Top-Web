@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { AiOutlineRight } from "react-icons/ai";
 import { motion } from "framer-motion";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import MyEventItem from "./MyEventItem";
+import AdminSearch from "../dashboard/navigation/AdminSearch";
+import Paginate from "../dashboard/navigation/Paginate";
+import { useLocation, useNavigate, useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { listMyEvents } from "../../features/actions/eventActions";
-import MyEventItem from "../events/MyEventItem";
 
-function MyEvents() {
+function AllProfileEvents() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const params = useParams();
   const [choices, SetChoices] = useState(false);
 
-  const eventList = useSelector((state) => state.eventList);
+  const eventMyList = useSelector((state) => state.eventMyList);
 
-  const { events, page, pages, loading, error } = eventList;
+  const { events, page, pages, loading, error } = eventMyList;
 
   const { search } = useLocation();
 
@@ -31,18 +32,9 @@ function MyEvents() {
   }, [dispatch, keyword]);
 
   return (
-    <motion.div className=" p-1 md:p-2   flex flex-col gap-3  text-black  mx-auto bg-white ">
-      <div className="flex flex-row justify-between items-center content-center">
-        <h1>Your Events</h1>
-
-        <Link
-          to={"/account/events"}
-          className="flex flex-row gap-1 items-center content-center justify-center  md:gap-2"
-        >
-          View All
-          <AiOutlineRight />
-        </Link>
-      </div>
+    <motion.div className=" p-1 md:p-2   flex flex-col gap-3 justify-center content-center items-center text-black  mx-auto bg-white mt-[100px] ">
+      {/* <Search /> */}
+      <AdminSearch />
 
       {/* center items */}
       {loading ? <div>Loading</div> : ""}
@@ -52,14 +44,21 @@ function MyEvents() {
           <h1 className="text-gray-500 text-md md:text-xl">0 Events</h1>
         </div>
       ) : (
-        <div className="flex flex-col md:grid md:grid-cols-2 w-full lg:grid-cols-3 justify-center content-center items-center gap-3 md:gap-4   ">
+        <div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 justify-center content-center items-center gap-3 md:gap-4   ">
           {events?.map((event) => (
             <MyEventItem key={event._id} event={event} />
           ))}
         </div>
       )}
+
+      <Paginate
+        page={page}
+        pages={pages}
+        keyword={keyword}
+        route="/account/events"
+      />
     </motion.div>
   );
 }
 
-export default MyEvents;
+export default AllProfileEvents;

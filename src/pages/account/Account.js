@@ -17,7 +17,6 @@ import MyDonationPage from "./donation/MyDonationPage";
 import MyEventsPage from "./events/MyEventsPage";
 
 function Account() {
-
   const [active, setActive] = useState(1);
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
@@ -73,8 +72,6 @@ function Account() {
         setEdit(false);
       }
     }
-
-
   }, [dispatch, keyword, user, userInfo, success]);
 
   /* HANDLERS */
@@ -120,22 +117,55 @@ function Account() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 1, scale: 1 }}
-              className="flex flex-row justify-around md:items-start content-center   gap-4  w-auto rounded-xl  border-t border-r border-l  p-2 md:p-3 "
+              className="flex flex-row justify-around md:items-start content-center   gap-4  w-auto rounded-xl    p-2 md:p-3 "
             >
               {/* Profile info */}
 
+
               <div className="flex flex-col items-center content-center justify-center md:flex-row gap-2 p-2 md:p-0 ">
                 {/* image */}
+               
 
-                <div className="">
+
+                <div className="relative">
                   <img
                     src={`${REACT_APP_URL}${user.profile_photo}`}
-                    className=" w-[250px] h-[250px]   object-center object-cover rounded-full  "
+                    className=" w-[250px] h-[250px] md:w-[250px] md:h-[250px]   object-center object-cover rounded-full  "
                     alt="profile photo"
                   />
+
+                   {/* edit profile */}
+                   <div
+                      onClick={() => navigate("/account/edit")}
+                      className="cursor-pointer flex flex-row justify-center content-center items-center gap-1 text-sm bg-green-500 rounded-full text-white p-2 hover:bg-green-600 absolute  bottom-2 right-5 border-[6px]  border-white "
+                    >
+                      <span>
+                        <VscEdit />
+                      </span>
+                      
+                    
+                    </div>
+
+                    
+              <div
+                      onClick={logoutHandler}
+                      className=" cursor-pointer flex flex-row self-start content-center items-center gap-1 text-xs  rounded-full absolute top-2 right-1 bg-gray-600 text-white hover:bg-red-600 active:bg-red-600 p-2 border-[6px]  border-white"
+                    >
+                      <span>
+                        <AiOutlineLogout />
+                      </span>
+                      <h1>Logout</h1>
+                      
+                    </div>
+
+                   
+
+
+
+
                 </div>
 
-                <div className="flex flex-col gap-1 text-sm md:text-[15px] items-center md:items-start content-center justify-center min-w-[300px] p-2 md:p-3">
+                <div className="flex flex-col gap-2 md:gap-3 text-sm md:text-[15px] items-center md:items-start content-center justify-center min-w-[300px] p-2 md:p-3" >
                   <h1 className="font-semibold text-lg border-b">
                     {user.first_name}
                     {"  "}
@@ -143,35 +173,21 @@ function Account() {
                     {user.last_name}
                   </h1>
 
-                  <h1 className="font-regular max-w-xs text-gray-500">
+                  <h1 className="font-regular max-w-sm text-center md:text-left text-gray-600  p-2 md:p-2 rounded-lg">
                     {user.bio}
                   </h1>
-                  <h1 className="font-regular text-gray-500">{user.company}</h1>
+                  <h1 className="font-semibold text-slate-600 ">
+                    
+                    {user.company}
+                    </h1>
 
-                  <div className="flex flex-row  items-center content-center justify-between gap-3 w-full">
-                    {/* edit profile */}
-
-                    <div
-                      onClick={() => navigate("/account/edit")}
-                      className="cursor-pointer flex flex-row justify-center content-center items-center gap-1 text-sm text-green-500 hover:text-green-600"
-                    >
-                      <span>
-                        <VscEdit />
-                      </span>
-                      <h1>Edit Info</h1>
-                    </div>
+                  <div className="flex flex-row  items-center content-center justify-between gap-3 w-full ">
+                   
+                  
 
                     {/* logout profile */}
 
-                    <div
-                      onClick={logoutHandler}
-                      className=" cursor-pointer flex flex-row justify-center content-center items-center gap-1 text-sm text-red-500 hover:text-red-600"
-                    >
-                      <h1>Logout</h1>
-                      <span>
-                        <AiOutlineLogout />
-                      </span>
-                    </div>
+                    
                   </div>
                 </div>
               </div>
@@ -179,25 +195,41 @@ function Account() {
           </motion.div>
 
           <motion.div className="flex flex-col gap-3 md:gap-4 p-2 md:p-3 w-full md:w-auto   mx-auto">
-
-            <div className="flex flex-row justify-center items-center content-center gap-2 bg-gray-100 rounded-xl border border-gray-200 text-[14px] md:text-[16px]  p-1">
-              <button onClick={() => setActive
-              (1)} className={active === 1 ? 'bg-white p-2 rounded-xl shadow-lg' : 'p-2 text-gray-500'}>My Posts</button>
-              <button onClick={() => setActive
-              (2)} className={active === 2 ? 'bg-white p-2 rounded-xl shadow-lg' : 'p-2 text-gray-500'}>My Events</button>
-              <button onClick={() => setActive
-              (3)} className={active === 3 ? 'bg-white p-2 rounded-xl shadow-lg' : 'p-2  text-gray-500'}>My Donations</button>
-            
-             
-             
+            <div className="flex flex-row justify-center items-center content-center gap-2 bg  rounded-lg border border-gray-100 text-[13px] md:text-[15px]  p-1">
+              <button
+                onClick={() => setActive(1)}
+                className={
+                  active === 1
+                    ? "bg-gray-600 text-white p-2 rounded-md  shadow-lg"
+                    : "p-2 text-gray-500"
+                }
+              >
+                My Posts
+              </button>
+              <button
+                onClick={() => setActive(2)}
+                className={
+                  active === 2
+                    ? "bg-gray-600 text-white p-2 rounded-md shadow-lg"
+                    : "p-2 text-gray-500"
+                }
+              >
+                My Events
+              </button>
+              <button
+                onClick={() => setActive(3)}
+                className={
+                  active === 3
+                    ? "bg-gray-600 text-white p-2  rounded-md  shadow-lg"
+                    : "p-2  text-gray-500"
+                }
+              >
+                My Donations
+              </button>
             </div>
-          {active === 3 && <MyDonationPage  key={3} /> }
-          {active === 2 && <MyEventsPage  key={2} /> }
-          {active === 1 && <MyPostsPage  key={1} /> }
-                                    
-           
-
-              
+            {active === 3 && <MyDonationPage key={3} />}
+            {active === 2 && <MyEventsPage key={2} />}
+            {active === 1 && <MyPostsPage key={1} />}
           </motion.div>
         </div>
       </div>

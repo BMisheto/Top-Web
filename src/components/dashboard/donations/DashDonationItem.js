@@ -39,7 +39,7 @@ function DashDonationItem({ donation }) {
   }, [success]);
 
   const deleteHandler = (id) => {
-    if (window.confirm("Are you sure you want to delete this Event ?")) {
+    if (window.confirm("Are you sure you want to delete this Donation ?")) {
       dispatch(deleteDonation(id));
     }
   };

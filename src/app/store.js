@@ -44,6 +44,7 @@ import {
   donationDeleteReducer,
   donationDetailsReducer,
   donationListReducer,
+  donationMyListReducer,
   donationUpdateReducer,
 } from "../features/reducers/donationReducers";
 import {
@@ -51,6 +52,7 @@ import {
   eventDeleteReducer,
   eventDetailsReducer,
   eventListReducer,
+  eventMyListReducer,
   eventUpdateReducer,
 } from "../features/reducers/eventsReducers";
 import {
@@ -83,12 +85,14 @@ const reducer = combineReducers({
   pollVote: pollVoteReducer,
 
   donationList: donationListReducer,
+  donationMyList: donationMyListReducer,
   donationDetails: donationDetailsReducer,
   donationDelete: donationDeleteReducer,
   donationCreate: donationCreateReducer,
   donationUpdate: donationUpdateReducer,
 
   eventList: eventListReducer,
+  eventMyList: eventMyListReducer,
   eventDetails: eventDetailsReducer,
   eventDelete: eventDeleteReducer,
   eventCreate: eventCreateReducer,
