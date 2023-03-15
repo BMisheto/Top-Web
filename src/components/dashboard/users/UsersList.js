@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router";
 import ItemLoading from "../../loading/ItemLoading";
@@ -14,6 +14,7 @@ function UsersList() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+  const [admin, setAdmin] =useState(false)
 
   /* PULLING OUT STATE */
   const userList = useSelector((state) => state.userList);
@@ -44,7 +45,27 @@ function UsersList() {
       dispatch(deleteUser(id));
   };
 
-  const makeAdmin = (id) => {};
+  const handleAdmin = ( id) => {
+    
+    const formData = new FormData();
+    formData.append("user", id);
+  
+    fetch("http://127.0.0.1:8000/api/users/makeadmin/", {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+  
 
   return (
     <motion.div
@@ -71,11 +92,6 @@ function UsersList() {
           Your Users
         </div>
 
-        {/* Filters */}
-        {/* <motion.div className="  hover:bg-gray-200 text-gray-600 min-w-[70px] flex flex-row justify-center items-center content-center text-[13px] md:text-[15px] rounded-md border border-gray-300 p-1  cursor-pointer gap-1 font-[450]">
-        <motion.h1>Filter</motion.h1>
-        <BsFilter />
-      </motion.div> */}
       </div>
 
       {/* Users */}
@@ -92,7 +108,7 @@ function UsersList() {
               <th className="p-1 lg:p-2">Phone Number</th>
               <th className="p-1 lg:p-2">Country</th>
               <th className="p-1 lg:p-2">Status</th>
-              <th className="p-1 lg:p-2">View</th>
+              <th className="p-1 lg:p-2">Admin</th>
               <th className="p-1 lg:p-2">Delete</th>
             </thead>
 
@@ -116,7 +132,7 @@ function UsersList() {
                   <td className="p-1 lg:p-2">{item.last_name}</td>
                   <td className="p-1 lg:p-2">{item.email}</td>
                   <td className="p-1 lg:p-2">{item.mobile}</td>
-                  <td className="p-1 lg:p-2">Tanzania</td>
+                  <td className="p-1 lg:p-2">{item.country}</td>
                   <td className="p-1 lg:p-2">
                     {item.isAdmin ? (
                       <div className="flex flex-rows justify-center items-center content-center gap-1  p-2 rounded-md text-[13px] ">
@@ -131,10 +147,14 @@ function UsersList() {
                     )}
                   </td>
                   <td className="p-1 lg:p-2">
-                    <div className="flex flex-rows justify-between items-center content-center gap-1  p-2 rounded-md text-[13px] text-green-600 cursor-pointer hover:underline">
-                      <MdPageview className="text-lg" />
-                      <h1>View</h1>
-                    </div>
+                    
+                    <div
+                    onClick={() => handleAdmin(item.id)}
+                     className="cursor-pointer flex flex-rows justify-between items-center content-center gap-1  p-2 rounded-md text-[13px] text-green-600 cursor-pointer hover:underline">
+                      
+
+                      <input type="checkbox" checked={item.isAdmin} className="text-gray-500 bg-gray-600"   />
+                     </div>
                   </td>
                   <td className="p-1 lg:p-2">
                     <div

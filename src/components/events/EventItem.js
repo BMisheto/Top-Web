@@ -11,7 +11,7 @@ function EventItem({ event }) {
     {/* item */}
     <motion.div
     whileHover={{ scale: 1.02 }}
-     className="flex flex-col rounded-xl border border-gray-100   justify-center content-center bg-gray-50 min-h-[300px]">
+    className="flex flex-col rounded-xl border border-gray-100   justify-center content-center bg-gray-50 min-h-[300px]">
       {/* image section */}
       <div className="max-w-[400px] md:w-full relative">
         <img

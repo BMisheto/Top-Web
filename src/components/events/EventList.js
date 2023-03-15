@@ -5,6 +5,10 @@ import {listEvents} from "../../features/actions/eventActions"
 import Search from '../search/Search';
 import { motion } from 'framer-motion';
 import EventItem from './EventItem';
+import EventLoading from '../loading/EventLoading';
+import { AiOutlinePlus } from 'react-icons/ai';
+import { BsCalendar, BsFilePostFill, BsX } from 'react-icons/bs';
+import { HiCurrencyDollar } from 'react-icons/hi';
 function EventList() {
 
     const dispatch = useDispatch();
@@ -37,6 +41,21 @@ function EventList() {
     }, [dispatch, keyword]);
 
 
+    const showChoices = () => {
+    SetChoices(!choices);
+  };
+
+  const createPostHandler = () => {
+    navigate("/feed/create/post");
+  };
+  const createEventHandler = () => {
+    navigate("/feed/create/event");
+  };
+  const createDonationHandler = () => {
+    navigate("/feed/create/donation");
+  };
+
+
   
    
   
@@ -48,7 +67,10 @@ function EventList() {
     <Search />
 
     {/* center items */}
-    {loading ? <div>Loading</div> : ""}
+    {loading ? <EventLoading /> : ""}
+
+
+    
 
 
     {events == 0 & !loading ? (
@@ -69,6 +91,69 @@ function EventList() {
     </div>
 
     )}
+
+
+
+
+     <div className="fixed bottom-10  right-10">
+        {/* sema choice */}
+
+        {choices ? (
+          <motion.div
+            animate={{ bottom: 0, opacity: 1 }}
+            initial={{ bottom: -100, opacity: 0 }}
+            exit={{ bottom: -800, opacity: 0 }}
+            className="flex flex-col p-2 md:p-3 gap-3"
+          >
+            <motion.div
+              onClick={createPostHandler}
+              whileHover={{ scale: 1.01 }}
+              whileTap={{ scale: 0.9 }}
+              className=" text-sm md:text-[17px] flex flex-row items-center content-center justify-center gap-2 bg-gray-700 text-white rounded-full p-2 min-w-[120px] h-[50px] cursor-pointer shadow-lg"
+            >
+              <h1>Post</h1>
+
+              <BsFilePostFill />
+            </motion.div>
+            <motion.div
+            onClick={createEventHandler}
+              whileHover={{ scale: 1.01 }}
+              whileTap={{ scale: 0.9 }}
+              className=" text-sm md:text-[17px] flex flex-row items-center content-center justify-center gap-2 bg-gray-700 text-white rounded-full p-2 min-w-[120px] h-[50px] cursor-pointer shadow-lg"
+            >
+              <h1>Event</h1>
+
+              <BsCalendar />
+            </motion.div>
+            <motion.div
+             onClick={createDonationHandler}
+              whileHover={{ scale: 1.01 }}
+              whileTap={{ scale: 0.9 }}
+              className=" text-sm md:text-[17px] flex flex-row items-center content-center justify-center gap-2 bg-gray-700 text-white rounded-full p-2 min-w-[120px] h-[50px] cursor-pointer shadow-lg"
+            >
+              <h1>Donation</h1>
+
+              <HiCurrencyDollar />
+            </motion.div>
+          </motion.div>
+        ) : (
+          ""
+        )}
+
+        {/* sema button */}
+        <motion.div
+          whileHover={{ scale: 1.05 }}
+          onClick={showChoices}
+          className="flex flex-row items-center content-center justify-center bg-black text-white  p-2 rounded-full min-w-[110px] cursor-pointer"
+        >
+          <h1 className="p-1 text-[1.1rem] md:text-[1.3rem]">Sema</h1>
+          {choices ? (
+            <BsX className="text-[1rem]  md:text-[1.5rem]" />
+          ) : (
+            <AiOutlinePlus className="text-[1rem]  md:text-[1.5rem]" />
+          )}
+        </motion.div>
+      </div>
 
     
 

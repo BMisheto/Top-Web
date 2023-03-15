@@ -26,6 +26,7 @@ import PollBarGraph from "./PollBarGraph";
 import { GraphData as data } from "../fakeData.js/GraphData";
 import PollPieChart from "./PollPieChart";
 import { HiCurrencyDollar } from "react-icons/hi";
+import PostLoading from "../loading/PostLoading";
 
 function Posts() {
   const dispatch = useDispatch();
@@ -60,6 +61,12 @@ function Posts() {
   const createPostHandler = () => {
     navigate("/feed/create/post");
   };
+  const createEventHandler = () => {
+    navigate("/feed/create/event");
+  };
+  const createDonationHandler = () => {
+    navigate("/feed/create/donation");
+  };
 
   return (
     <motion.div className=" p-1 md:p-2   flex flex-col gap-3 justify-center content-center items-center text-black  mx-auto bg-white mt-[100px]">
@@ -77,7 +84,7 @@ function Posts() {
       <Search />
 
       {/* center items */}
-      {loading ? <div>Loading</div> : ""}
+      {loading ? <PostLoading /> : ""}
 
       {(posts == 0) & !loading ? (
         <div className="flex flex-col justify-center items-center content-center min-h-[300px] min-w-[200px] md:min-w-[300px] md:w-[90%] bg-gray-50 border border-gray-100 rounded-xl">
@@ -112,6 +119,7 @@ function Posts() {
               <BsFilePostFill />
             </motion.div>
             <motion.div
+            onClick={createEventHandler}
               whileHover={{ scale: 1.01 }}
               whileTap={{ scale: 0.9 }}
               className=" text-sm md:text-[17px] flex flex-row items-center content-center justify-center gap-2 bg-gray-700 text-white rounded-full p-2 min-w-[120px] h-[50px] cursor-pointer shadow-lg"
@@ -121,6 +129,7 @@ function Posts() {
               <BsCalendar />
             </motion.div>
             <motion.div
+             onClick={createDonationHandler}
               whileHover={{ scale: 1.01 }}
               whileTap={{ scale: 0.9 }}
               className=" text-sm md:text-[17px] flex flex-row items-center content-center justify-center gap-2 bg-gray-700 text-white rounded-full p-2 min-w-[120px] h-[50px] cursor-pointer shadow-lg"
