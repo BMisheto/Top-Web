@@ -7,10 +7,12 @@ import { motion } from "framer-motion";
 import { REACT_API_URL } from "../../utilities/utils";
 import { HiCurrencyDollar } from "react-icons/hi";
 import { AiFillCloseCircle } from "react-icons/ai";
+import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 function DonationDetails() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [amount, setAmount] = useState(0)
 
   const [modal, setModal] = useState(false);
 
@@ -20,14 +22,50 @@ function DonationDetails() {
   const donationDetails = useSelector((state) => state.donationDetails);
   const { loading, donation, error } = donationDetails;
 
-  // product detail dispatch
+
+  
   useEffect(() => {
     dispatch(listDonationDetails(donationId));
   }, [dispatch, donationId]);
 
+
+  const paypalOptions = {
+    "client-id": "YOUR_PAYPAL_CLIENT_ID",
+    currency: "USD",
+    intent: "capture",
+  };
+
+  // Define PayPal button styles
+  const buttonStyles = {
+    layout: "horizontal",
+    color: "gold",
+    shape: "rect",
+    label: "paypal",
+    
+  };
+
+  // Define onApprove and onError functions
+  const onApprove = (data, actions) => {
+    // Capture the payment and redirect to success page
+    return actions.order.capture().then(function(details) {
+      // TODO: Implement success page
+      console.log("Payment successful", details);
+    });
+  };
+
+  const onError = (error) => {
+    console.log("PayPal error", error);
+  };
+
+ 
+  
+
+
   return (
+    <PayPalScriptProvider >
     <div className="subpixel-antialiased min-h-screen inset-0 flex flex-col justify-center items-center font-sans    mx-auto lg:justify-center lg:align-center lg:text-centen rounded-b-2xl p-3 mt-[50px] ">
       {/* central div */}
+
 
       <div className="flex flex-col justify-center items-start content-center gap-2 md:gap-3 p-2 md:p-3 w-full md:w-[80%] lg:w-[80%]">
         {/* back button */}
@@ -64,35 +102,66 @@ function DonationDetails() {
                   Collected
                 </h1>
                 <p className="text-sm border bg-gray-100 p-2 rounded-lg text-gray-600">
-                  {/* 100000.00 */}
+                {Intl.NumberFormat("en-US").format(donation?.total)}{" "}
                 </p>
               </div>
               <div className="flex flex-col gap-2 justify-center  text-md items-end content-start">
                 <h1 className=" font-semibold text-sm text-gray-500">Target</h1>
                 <p className="text-sm border bg-gray-100 p-2 rounded-lg text-gray-600">
-                  {donation.target}
+                  
+                  {Intl.NumberFormat("en-US").format(donation?.target)}{" "}
                 </p>
               </div>
             </div>
 
             <p className="max-w-2xl">{donation.description}</p>
 
+            <div className="flex  flex-col gap-1 mt-[30px]">
+            <h1 className="  font-semibold text-sm text-gray-500">
+                  Amount to Donate
+                </h1>
+                    <input
+                    type="number"
+                      className="p-2 border border-gray-100 min-h-[50px] bg-none outline-none rounded-xl placeholder:text-gray-600
+                                    placeholder:text-[13px] placeholder:pl-4  text-[15px] "
+                      value={amount}
+                      onChange={(e) => setAmount(e.target.value)}
+                      required
+                      placeholder="Amount"
+                    />
+                  </div>
+
             <div className="w-full">
-              <motion.button
-                onClick={() => navigate(`/donate/make-donation/${donation._id}`)}
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.99 }}
-                className="self-end flex flex-row items-center justify-center content-center gap-2  text-white bg-green-500 hover:border-green-500 hover:bg-green-500 hover:text-white min-w-[100px] rounded-xl w-full  rounded-lg p-2 h-[50px] hover:drop-shadow-xl 
-                "
-              >
-                Donate
-                <HiCurrencyDollar />
-              </motion.button>
+              
+
+
+              <PayPalButtons
+              className="rounded-xl"
+      createOrder={(data, actions) => {
+        // Create a PayPal order with the specified amount
+        return actions.order.create({
+          purchase_units: [
+            {
+              amount: {
+                value: amount,
+              },
+            },
+          ],
+        });
+      }}
+      onApprove={onApprove}
+      onError={onError}
+      options={paypalOptions}
+      style={buttonStyles}
+    />
+
+             
             </div>
           </div>
         </div>
       </div>
     </div>
+    </PayPalScriptProvider>
   );
 }
 

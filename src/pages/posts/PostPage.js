@@ -9,6 +9,8 @@ import PostComments from "../../components/posts/PostComments";
 import CommentForm from "../../components/posts/CommentForm";
 import PostPoll from "../../components/posts/PostPoll";
 import Charts from "../../components/posts/Charts";
+import { AiOutlineGlobal } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 function PostPage() {
   const dispatch = useDispatch();
@@ -24,6 +26,7 @@ function PostPage() {
   useEffect(() => {
     dispatch(listPostDetails(postId));
   }, [dispatch, postId]);
+
 
   return (
     <div className="subpixel-antialiased min-h-screen inset-0 flex flex-col justify-center items-center font-sans   lg:justify-center lg:align-center  p-3 mt-[100px] ">
@@ -61,6 +64,18 @@ function PostPage() {
             {post?.content}
           </p>
         </div>
+        {post.link && (
+           <Link
+           target="_blank"
+             to={post?.link} className="p-2 text-slate-600 text-light flex flex-row gap-2 items-center content-center justify-center bg-gray-100 text-sm rounded-full">
+             <AiOutlineGlobal />
+             <p className="  ">
+               {post?.link}
+             </p>
+           </Link>
+
+        )}
+       
 
         {/* polls */}
         {post.is_poll ? (

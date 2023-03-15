@@ -211,12 +211,23 @@ function DashCreatePostPage() {
               ))}
             </div>
 
-            <div onClick={addOption} className="cursor-pointer">
-              add option
-            </div>
-            <div onClick={removeOption} className="cursor-pointer">
-              remove option
-            </div>
+            <div
+                className="flex flex-row justify-between items-center content-center  w-full
+            "
+              >
+                <div
+                  onClick={addOption}
+                  className="cursor-pointer text-white bg-green-600 p-2 rounded-md text-sm"
+                >
+                  add option
+                </div>
+                <div
+                  onClick={removeOption}
+                  className="cursor-pointer text-white bg-gray-600 p-2 rounded-md text-sm"
+                >
+                  remove option
+                </div>
+              </div>
 
             {/* Offer and Featured */}
             

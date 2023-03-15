@@ -1,7 +1,42 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { register } from "../../features/actions/userActions";
 
 function Register() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+  /* STATE */
+  const [first_name, setFirstName] = useState("");
+  const [last_name, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [mobile, setMobile] = useState("");
+  const [password, setpassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [message, setMessage] = useState("");
+
+  const redirect = "/";
+
+  const userRegister = useSelector((state) => state.userRegister);
+
+  const { userInfo, loading, error } = userRegister;
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate(redirect);
+    }
+  }, [navigate, userInfo, redirect]);
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+
+    if (password !== confirmPassword) {
+      setMessage("Passwords do not match");
+    } else {
+      dispatch(register(first_name, last_name, mobile, email, password));
+    }
+  };
   return (
     <div className="">
       <main className="min-h-[500px] ">
@@ -20,53 +55,61 @@ function Register() {
 
               <div>
                 <div>
-                  <form className="flex flex-col  content-center items-center space-y-4 w-full">
+                  <form
+                    onSubmit={submitHandler}
+                    className="flex flex-col  content-center items-center space-y-4 w-full"
+                  >
                     <input
-                      className="p-2 border-b bg-gray-100 outline-none  placeholder:text-gray-600
-                          placeholder:text-[13px]
-                          placeholder:pl-4 min-w-[300px] md:min-w-[400px] h-[60px] text-[15px] rounded-xl"
+                      className="p-2 border bg-none outline-none rounded-xl placeholder:text-gray-600
+                       placeholder:text-[13px]
+                       placeholder:pl-4 min-w-[300px] md:min-w-[400px] h-[60px] text-[15px]"
                       required
+                      onChange={(e) => setFirstName(e.target.value)}
                       placeholder="Firstname"
                     />
 
                     <input
-                      className="p-2 border-b bg-gray-100 outline-none  placeholder:text-gray-600
-                          placeholder:text-[13px]
-                          placeholder:pl-4 min-w-[300px] md:min-w-[400px] h-[60px] text-[15px] rounded-xl"
+                      className="p-2 border bg-none outline-none rounded-xl placeholder:text-gray-600
+                       placeholder:text-[13px]
+                       placeholder:pl-4 min-w-[300px] md:min-w-[400px] h-[60px] text-[15px]"
                       required
+                      onChange={(e) => setLastName(e.target.value)}
                       placeholder="Lastname"
                     />
 
                     <input
-                      className="p-2 border-b bg-gray-100 outline-none  placeholder:text-gray-600
-                          placeholder:text-[13px]
-                          placeholder:pl-4 min-w-[300px] md:min-w-[400px] h-[60px] text-[15px] rounded-xl"
-                      required
-                      placeholder="Mobile"
+                      className="p-2 border bg-none outline-none rounded-xl placeholder:text-gray-600
+                      placeholder:text-[13px]
+                      placeholder:pl-4 min-w-[300px] md:min-w-[400px] h-[60px] text-[15px]"
+                      onChange={(e) => setMobile(e.target.value)}
+                      placeholder="Mobile(optional)"
                     />
 
                     <input
-                      className="p-2 border-b bg-gray-100 outline-none  placeholder:text-gray-600
-                          placeholder:text-[13px]
-                          placeholder:pl-4 min-w-[300px] md:min-w-[400px] h-[60px] text-[15px] rounded-xl"
+                      className="p-2 border bg-none outline-none rounded-xl placeholder:text-gray-600
+                       placeholder:text-[13px]
+                       placeholder:pl-4 min-w-[300px] md:min-w-[400px] h-[60px] text-[15px]"
+                      onChange={(e) => setEmail(e.target.value)}
                       required
                       placeholder="Email"
                     />
 
                     <input
-                      className="p-2 border-b bg-gray-100 outline-none  placeholder:text-gray-600
-                             placeholder:text-[13px]
-                             placeholder:pl-4 min-w-[300px] md:min-w-[400px] h-[60px] text-[15px] rounded-xl"
+                      className="p-2 border bg-none outline-none rounded-xl placeholder:text-gray-600
+                       placeholder:text-[13px]
+                       placeholder:pl-4 min-w-[300px] md:min-w-[400px] h-[60px] text-[15px]"
                       type="Password"
+                      onChange={(e) => setpassword(e.target.value)}
                       required
                       placeholder="password"
                     />
 
                     <input
-                      className="p-2 border-b bg-gray-100 outline-none  placeholder:text-gray-600
-                              placeholder:text-[13px]
-                              placeholder:pl-4 min-w-[300px] md:min-w-[400px] h-[60px] text-[15px] rounded-xl"
+                      className="p-2 border bg-none outline-none rounded-xl placeholder:text-gray-600
+                       placeholder:text-[13px]
+                       placeholder:pl-4 min-w-[300px] md:min-w-[400px] h-[60px] text-[15px]"
                       type="Password"
+                      onChange={(e) => setConfirmPassword(e.target.value)}
                       required
                       placeholder="Confirm Password"
                     />

@@ -53,9 +53,9 @@ function Login() {
                   className="flex flex-col justify-start  content-center items-center space-y-4 w-full"
                 >
                   <input
-                    className="p-2 border-b bg-gray-100 outline-none  placeholder:text-gray-600
-                               placeholder:text-[13px]
-                               placeholder:pl-4 min-w-[300px] md:min-w-[400px] h-[60px] text-[15px] rounded-xl"
+                     className="p-2 border bg-none outline-none rounded-xl placeholder:text-gray-600
+                     placeholder:text-[13px]
+                     placeholder:pl-4 min-w-[300px] md:min-w-[400px] h-[60px] text-[15px]"
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -64,9 +64,9 @@ function Login() {
                   />
 
                   <input
-                    className="p-2 border-b bg-gray-100 outline-none  placeholder:text-gray-600
-                             placeholder:text-[13px]
-                             placeholder:pl-4 min-w-[300px] md:min-w-[400px] h-[60px] text-[15px] rounded-xl"
+                    className="p-2 border bg-none outline-none rounded-xl placeholder:text-gray-600
+                    placeholder:text-[13px]
+                    placeholder:pl-4 min-w-[300px] md:min-w-[400px] h-[60px] text-[15px]"
                     type="Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}

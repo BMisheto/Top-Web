@@ -278,7 +278,7 @@ function ProfileEdit() {
 
                  {/* Email */}
                  <div className="flex  flex-col gap-1 w-full">
-                    <h1 className="text-[13px] md:text-[14px] font-semibold text-gray-500">company:</h1>
+                    <h1 className="text-[13px] md:text-[14px] font-semibold text-gray-500">Company:</h1>
                     <input
                        className="p-2 border border-gray-100 min-h-[50px] bg-none outline-none rounded-xl placeholder:text-gray-600
                        placeholder:text-[13px] placeholder:pl-4    text-[15px] "
