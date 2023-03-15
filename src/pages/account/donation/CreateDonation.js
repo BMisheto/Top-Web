@@ -118,7 +118,7 @@ function CreateDonation() {
                         required
                         type="number"
                         onChange={(e) => setTarget(e.target.value)}
-                        placeholder="Venue"
+                        placeholder="Target"
                       />
 
                       <textarea
@@ -137,7 +137,7 @@ function CreateDonation() {
                         type="submit"
                         className="p-2  bg-none outline-none rounded-xl bg-blue-600 text-white  hover:bg-blue-700  min-w-[300px] md:min-w-[400px] h-[60px] text-[13px] md:text-[16px] drop-shadow-lg shadow-blue-500/50  m-1"
                       >
-                        Create Event
+                        Create Donation
                       </button>
                     </div>
                   </form>
