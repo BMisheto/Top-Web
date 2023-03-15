@@ -45,7 +45,7 @@ function CreateEvent() {
     formData.append("event_cover", image);
     formData.append("user", userInfo.id);
 
-    fetch("http://127.0.0.1:8000/api/events/create/", {
+    fetch("https://web-production-86072.up.railway.app/api/events/create/", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${userInfo.token}`,
