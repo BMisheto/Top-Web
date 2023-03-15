@@ -37,6 +37,7 @@ import AllMyEvents from "./pages/account/events/AllMyEvents";
 import ProfileEventEdit from "./pages/account/events/ProfileEventEdit";
 import AllMyDonation from "./pages/account/donation/AllMyDonation";
 import ProfileDonationEdit from "./pages/account/donation/ProfileDonationEdit";
+import PublicRoute from "./routes/PublicRoute";
 
 function App() {
   return (
@@ -59,12 +60,25 @@ function App() {
           <Route path="/donate/:id" element={<DonationDetails />} />
 
           {/* login,register & password reset */}
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/login" element={    <PublicRoute>
+                <Login />
+              </PublicRoute>} />
+          <Route
+            path="/register"
+            element={
+              <PublicRoute>
+                <Register />
+              </PublicRoute>
+            }
+          />
+          <Route path="/forgot-password" element={    <PublicRoute>
+                <ForgotPassword />
+              </PublicRoute>} />
           <Route
             path="/reset-password/:encoded_pk/:token/"
-            element={<ResetPasswordPage />}
+            element={    <PublicRoute>
+              <ResetPasswordPage />
+            </PublicRoute>}
           />
 
           <Route

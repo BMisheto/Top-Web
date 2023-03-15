@@ -149,30 +149,25 @@ export const register = (firstname,lastname,mobile,email, password) => async (di
   }
 };
 
-/* ACTION CREATOR USED IN GETTING USER DETAILS IN ProfileScreen COMPONENT  */
 export const getUserDetails = (id) => async (dispatch, getState) => {
   try {
     dispatch({
       type: USER_DETAILS_REQUEST,
     });
 
-    // PULLING OUT THE CURRENT USER WE ARE LOGGED IN AS
     const {
       userLogin: { userInfo },
     } = getState();
 
-    /* MAKE GET REQUEST TO GET BACK THE USER DATA */
     const config = {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${userInfo.token}` /* PASSING IN USER TOKEN AND IF THE USER IN AUTHORISED HE'LL HAVE FULL ACCESS TO HIS PROFILE INFORMATION */,
+        Authorization: `Bearer ${userInfo.token}` ,
       },
     };
 
-    // USING ${id} BECAUSE WHILE ACCESSING NORMAL USER WE'LL PASS STRING 'profile' BUT WHILE ACCESSING ADMIN PANEL WE'LL PASS THE 'id' SO LINK HAS TO BE DYNAMIC
     const { data } = await axios.get(`${REACT_API_URL}/users/${id}/`, config);
 
-    /* IF GET REQUEST SUCCESSFULL WE DISPATCH & SEND THE PAYLOAD TO OUR REDUCER */
     dispatch({
       type: USER_DETAILS_SUCCESS,
       payload: data,

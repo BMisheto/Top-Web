@@ -63,7 +63,6 @@ export const addAttending = (event) => async (dispatch, getState) => {
     dispatch({
       type: ATTENDING_ADD_SUCCESS,
       payload: data,
-      
     });
   } catch (error) {
     dispatch({
