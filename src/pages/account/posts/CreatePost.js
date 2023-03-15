@@ -93,7 +93,7 @@ function CreatePost() {
                       value={title}
                       onChange={(e) => setTitle(e.target.value)}
                       required
-                      placeholder="Product Name"
+                      placeholder="Post title"
                     />
                   </div>
 
@@ -108,7 +108,7 @@ function CreatePost() {
                       type="text"
                       value={link}
                       onChange={(e) => setLink(e.target.value)}
-                      placeholder="Product Name"
+                      placeholder="Post link(optional"
                     />
                   </div>
                   {/* event location */}
