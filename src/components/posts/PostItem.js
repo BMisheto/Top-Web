@@ -41,20 +41,7 @@ function PostItem({ post }) {
           <div
             className="flex flex-row gap-1 p-1 items-start justify-center content-start"
           >
-            <div>
-              <img
-                src={`${REACT_API_URL}${post?.user?.profile_photo}`}
-                className="w-[50px] h-[50px] border rounded-full"
-              />
-            </div>
-            <div className="p-1">
-              <h1 className="text-black font-semibold text-[12px] md:text-[15px]">
-                {post.user.first_name} {post.user.last_name}
-              </h1>
-
-              <p className="text-xs  text-black">{post?.user?.company}</p>
-            </div>
-          </div>
+           
         </div>
 
         {/* Question or Topic */}
