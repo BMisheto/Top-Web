@@ -121,51 +121,38 @@ function Account() {
             >
               {/* Profile info */}
 
-
               <div className="flex flex-col items-center content-center justify-center md:flex-row gap-2 p-2 md:p-0 ">
                 {/* image */}
-               
-
 
                 <div className="relative">
                   <img
                     src={`${REACT_APP_URL}${user.profile_photo}`}
-                    className=" w-[250px] h-[250px] md:w-[250px] md:h-[250px]   object-center object-cover rounded-full  "
+                    className=" w-[250px] h-[250px] md:w-[250px] md:h-[250px]   object-center object-cover rounded-full  border p-2 border-gray-100 bg-gray-50 "
                     alt="profile photo"
                   />
 
-                   {/* edit profile */}
-                   <div
-                      onClick={() => navigate("/account/edit")}
-                      className="cursor-pointer flex flex-row justify-center content-center items-center gap-1 text-sm bg-green-500 rounded-full text-white p-2 hover:bg-green-600 absolute  bottom-2 right-5 border-[6px]  border-white "
-                    >
-                      <span>
-                        <VscEdit />
-                      </span>
-                      
-                    
-                    </div>
+                  {/* edit profile */}
+                  <div
+                    onClick={() => navigate("/account/edit")}
+                    className="cursor-pointer flex flex-row justify-center content-center items-center gap-1 text-sm bg-green-500 rounded-full text-white p-2 hover:bg-green-600 absolute  bottom-2 right-5 border-[6px]  border-gray-100  "
+                  >
+                    <span>
+                      <VscEdit />
+                    </span>
+                  </div>
 
-                    
-              <div
-                      onClick={logoutHandler}
-                      className=" cursor-pointer flex flex-row self-start content-center items-center gap-1 text-xs  rounded-full absolute top-2 right-1 bg-gray-600 text-white hover:bg-red-600 active:bg-red-600 p-2 border-[6px]  border-white"
-                    >
-                      <span>
-                        <AiOutlineLogout />
-                      </span>
-                      <h1>Logout</h1>
-                      
-                    </div>
-
-                   
-
-
-
-
+                  <div
+                    onClick={logoutHandler}
+                    className=" cursor-pointer flex flex-row self-start content-center items-center gap-1 text-xs  rounded-full absolute top-2 right-1 bg-gray-600 text-white hover:bg-red-600 active:bg-red-600 p-2 border-[6px]  border-white "
+                  >
+                    <span>
+                      <AiOutlineLogout />
+                    </span>
+                    <h1>Logout</h1>
+                  </div>
                 </div>
 
-                <div className="flex flex-col gap-2 md:gap-3 text-sm md:text-[15px] items-center md:items-start content-center justify-center min-w-[300px] p-2 md:p-3" >
+                <div className="flex flex-col gap-2 md:gap-3 text-sm md:text-[15px] items-center md:items-start content-center justify-center min-w-[300px] p-2 md:p-3">
                   <h1 className="font-semibold text-lg border-b">
                     {user.first_name}
                     {"  "}
@@ -173,21 +160,15 @@ function Account() {
                     {user.last_name}
                   </h1>
 
-                  <h1 className="font-regular max-w-sm text-center md:text-left text-gray-600  p-2 md:p-2 rounded-lg">
+                  <h1 className="font-regular text-[15px] max-w-sm text-center md:text-left text-gray-600  p-2 md:p-2 rounded-lg">
                     {user.bio}
                   </h1>
                   <h1 className="font-semibold text-slate-600 ">
-                    
                     {user.company}
-                    </h1>
+                  </h1>
 
                   <div className="flex flex-row  items-center content-center justify-between gap-3 w-full ">
-                   
-                  
-
                     {/* logout profile */}
-
-                    
                   </div>
                 </div>
               </div>

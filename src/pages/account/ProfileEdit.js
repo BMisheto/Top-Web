@@ -305,65 +305,19 @@ function ProfileEdit() {
                 <div className="w-full p-1">
                   {/* title */}
                   <div className="flex flex-row justify-start items-center content-center text-[13px] md:text-[15px] p-1">
-                    {changePassword == false && (
+                    
                       <h1
-                        onClick={changepassword}
+                        onClick={() => navigate('/account/password')}
                         className="font-[400] cursor-pointer text-blue-500"
                       >
                         Change Your Password
                       </h1>
-                    )}
+                    
 
-                    {changePassword == true && (
-                      <h1
-                        onClick={() => setChangePassword(false)}
-                        className="font-[300] cursor-pointer text-red-500 flex flex-row items-center content-center"
-                      >
-                        Cancel{" "}
-                        <span>
-                          <BsX className="text-[14px]" />
-                        </span>
-                      </h1>
-                    )}
+                   
                   </div>
 
-                  {changePassword && (
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 1, scale: 1 }}
-                      className="flex flex-col md:flex-row justify-between content-center items-center w-full gap-2"
-                    >
-                      {/* password */}
-                      <div className="flex  flex-col gap-1 w-full">
-                        <h1 className="text-[13px] md:text-[14px] font-semibold text-gray-500">
-                          Password:
-                        </h1>
-                        <input
-                          className="p-2 border min-h-[50px] bg-none outline-none rounded-xl placeholder:text-gray-600
-                          placeholder:text-[13px] placeholder:pl-4 bg-gray-50   text-[15px] "
-                          type="password"
-                          onChange={(e) => setpassword(e.target.value)}
-                          placeholder="Password"
-                        />
-                      </div>
-
-                      {/* confirmPassword */}
-                      <div className="flex  flex-col gap-1 w-full">
-                        <h1 className="text-[13px] md:text-[14px] font-semibold text-gray-500">
-                          Confirm Password:
-                        </h1>
-                        <input
-                           className="p-2 border min-h-[50px] bg-none outline-none rounded-xl placeholder:text-gray-600
-                           placeholder:text-[13px] placeholder:pl-4 bg-gray-50   text-[15px] "
-                          required
-                          type="password"
-                          onChange={(e) => setConfirmPassword(e.target.value)}
-                          placeholder="confirm Password"
-                        />
-                      </div>
-                    </motion.div>
-                  )}
+                
                 </div>
 
                 {/* update and Cancel */}
