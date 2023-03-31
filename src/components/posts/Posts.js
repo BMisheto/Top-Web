@@ -27,6 +27,7 @@ import { GraphData as data } from "../fakeData.js/GraphData";
 import PollPieChart from "./PollPieChart";
 import { HiCurrencyDollar } from "react-icons/hi";
 import PostLoading from "../loading/PostLoading";
+import Paginate from "../dashboard/navigation/Paginate";
 
 function Posts() {
   const dispatch = useDispatch();
@@ -98,6 +99,11 @@ function Posts() {
         </div>
       )}
 
+      {/* pagination */}
+      <div className="p-2 md:p-3 mt-[20px]">
+        <Paginate page={page} pages={pages} keyword={keyword} route="/" />
+      </div>
+
       <div className="fixed bottom-10  right-10">
         {/* sema choice */}
 
@@ -119,7 +125,7 @@ function Posts() {
               <BsFilePostFill />
             </motion.div>
             <motion.div
-            onClick={createEventHandler}
+              onClick={createEventHandler}
               whileHover={{ scale: 1.01 }}
               whileTap={{ scale: 0.9 }}
               className=" text-sm md:text-[17px] flex flex-row items-center content-center justify-center gap-2 bg-gray-700 text-white rounded-full p-2 min-w-[120px] h-[50px] cursor-pointer shadow-lg"
@@ -129,7 +135,7 @@ function Posts() {
               <BsCalendar />
             </motion.div>
             <motion.div
-             onClick={createDonationHandler}
+              onClick={createDonationHandler}
               whileHover={{ scale: 1.01 }}
               whileTap={{ scale: 0.9 }}
               className=" text-sm md:text-[17px] flex flex-row items-center content-center justify-center gap-2 bg-gray-700 text-white rounded-full p-2 min-w-[120px] h-[50px] cursor-pointer shadow-lg"

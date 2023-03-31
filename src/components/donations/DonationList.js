@@ -9,6 +9,7 @@ import DonationLoading from '../loading/DonationLoading';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { BsCalendar, BsFilePostFill, BsX } from 'react-icons/bs';
 import { HiCurrencyDollar } from 'react-icons/hi';
+import Paginate from '../dashboard/navigation/Paginate';
 
 function DonationList() {
     const dispatch = useDispatch();
@@ -84,6 +85,12 @@ function DonationList() {
     </div>
 
     )}
+
+    {/* pagination */}
+<div className="p-2 md:p-3 mt-[20px]">
+        <Paginate page={page} pages={pages} keyword={keyword} route="/donate" />
+      </div>
+
 
     
 <div className="fixed bottom-10  right-10">

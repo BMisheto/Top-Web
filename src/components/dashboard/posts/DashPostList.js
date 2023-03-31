@@ -9,6 +9,7 @@ import AdminSearch from "../navigation/AdminSearch";
 import { POST_CREATE_RESET } from "../../../features/constants/postConstants";
 import { createPost, listPosts } from "../../../features/actions/postActions";
 import DashPostItem from "./DashPostItem";
+import Paginate from "../navigation/Paginate";
 
 function DashPostList() {
   const dispatch = useDispatch();
@@ -101,6 +102,12 @@ function DashPostList() {
 </div>
 
 )}
+
+
+{/* pagination */}
+<div className="p-2 md:p-3 mt-[20px]">
+        <Paginate page={page} pages={pages} keyword={keyword} route="/dashboard/posts" />
+      </div>
 
 
 

@@ -18,6 +18,7 @@ function DonateItem({ donation }) {
         <div className="max-w-[400px] md:w-full relative">
           <img
             src={`${REACT_API_URL}${donation?.donation_cover}`}
+            loading="lazy"
             className="h-[300px] w-full md:w-[400px] md:h-[300px]  lg:w-[400px] lg:h-[300px]  object-center object-cover rounded-t-xl"
             alt="donation cover"
           />

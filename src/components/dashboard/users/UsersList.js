@@ -150,7 +150,7 @@ function UsersList() {
                     
                     <div
                     onClick={() => handleAdmin(item.id)}
-                     className="cursor-pointer flex flex-rows justify-between items-center content-center gap-1  p-2 rounded-md text-[13px] text-green-600 cursor-pointer hover:underline">
+                     className="cursor-pointer flex flex-rows justify-between items-center content-center gap-1  p-2 rounded-md text-[13px] text-green-600  hover:underline">
                       
 
                       <input type="checkbox" checked={item.isAdmin} className="text-gray-500 bg-gray-600"   />
