@@ -98,11 +98,11 @@ function CreatePostItem() {
                   className="p-2 border bg-none outline-none rounded-xl placeholder:text-gray-600
                                               placeholder:text-[15px]
                                               placeholder:pl-4  min-w-[300px] md:min-w-[320px] lg:min-w-[400px] h-[60px] drop-shadow-sm "
-                  type="text"
+                  type="Title"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   required
-                  placeholder="Product Name"
+                  placeholder="Title"
                 />
               </div>
 
@@ -114,10 +114,10 @@ function CreatePostItem() {
                   className="p-2 border bg-none outline-none rounded-xl placeholder:text-gray-600
                                               placeholder:text-[15px]
                                               placeholder:pl-4  min-w-[300px] md:min-w-[320px] lg:min-w-[400px] h-[60px] drop-shadow-sm "
-                  type="text"
+                  type="Link"
                   value={link}
                   onChange={(e) => setLink(e.target.value)}
-                  placeholder="Product Name"
+                  placeholder="Post Link"
                 />
               </div>
               {/* event location */}
@@ -132,7 +132,7 @@ function CreatePostItem() {
                   type="checkbox"
                   checked={is_poll}
                   onChange={(e) => setPoll(e.target.checked)}
-                  placeholder="Featured "
+                  placeholder="is poll "
                 />
               </div>
             </div>
