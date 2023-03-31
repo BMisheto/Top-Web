@@ -164,7 +164,7 @@ function EventsDetails() {
                       </motion.button>
                     </div>
                   )}
-                  {iuserAttending && (
+                  {isAttending && (
                     <div className="w-full">
                       <motion.button
                         onClick={handleModal}
