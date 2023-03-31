@@ -145,7 +145,7 @@ function CreatePostItem() {
                 <textarea
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
-                  placeholder="Description"
+                  placeholder="Content"
                   className="p-2 border bg-none outline-none rounded-xl placeholder:text-gray-600
                                           placeholder:text-[15px]
                                           placeholder:pl-4 min-w-[300px] md:min-w-[320px] lg:min-w-[400px] h-full text-[15px] min-h-[200px]"
