@@ -15,12 +15,24 @@ function CreatePostItem() {
   const [link, setLink] = useState("");
   const [choices, setChoices] = useState(["Option 1", "Option 2"]);
 
+  const postCreate = useSelector((state) => state.postCreate);
+
+  const { success, error } = postCreate;
+
+
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+
+
   useEffect(() => {
     setUser(userInfo._id);
-  }, [userInfo]);
+    if(success){
+      navigate('/');
+    } else {
+      return
+    }
+  }, [userInfo, success]);
 
   const submitHandler = (e) => {
     e.preventDefault();
