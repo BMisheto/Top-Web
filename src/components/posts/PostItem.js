@@ -41,6 +41,8 @@ function PostItem({ post }) {
           <div
             className="flex flex-row gap-1 p-1 items-start justify-center content-start"
           >
+    
+    </div>
            
         </div>
 
